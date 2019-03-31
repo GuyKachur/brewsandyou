@@ -1,0 +1,114 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // font-size: 62.5%;
+}
+
+body {
+  background-color: $body-background-color;
+  color: $body-default-color;
+  font-family: $body-default-font-family;
+  font-size: $base-font-size;
+}
+
+h1 {
+  font-weight: 300;
+  margin-bottom: $space;
+}
+
+h2 {
+  font-size: $large-font-size;
+  margin-bottom: $space;
+}
+
+p {
+  margin-bottom: $space;
+}
+
+a {
+  color: $body-default-color;
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+  border: 1px solid $input-border;
+  color: $body-default-color;
+  font-size: $base-font-size;
+  font-family: $body-default-font-family;
+  margin-bottom: $space;
+  padding: $input-spacing;
+}
+
+
+.primary-color {
+  background-color: #8ac4ff;
+}
+
+.secondary-color {
+  background-color: #8de4ff;
+}
+
+nav span {
+  color: rgba(0, 0, 0, 0.75);
+}
+h1 {
+  padding: 0.5em;
+}
+
+h6 {
+  margin-right: 1.2em;
+}
+
+footer {
+  margin-top: 3em;
+}
+
+
+/* temp */
+.button {
+  background-color: $button-bg;
+  border: none;
+  color: $button-color;
+  cursor: pointer;
+  font-size: $base-font-size;
+  line-height: 1.2;
+  margin-bottom: $space;
+  padding: $input-spacing;
+  text-transform: uppercase;
+}
+
+.boxed-view {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  // height: 60vh;
+  margin-top: 2rem;
+  width: 100vw;
+}
+
+.boxed-view--modal {
+  background: fade-out($boxed-view-overlay-bg, .3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.boxed-view__box {
+  background-color: $boxed-view-bg;
+  border: 1px solid $boxed-view-border-color;
+  padding: 2.4rem;
+  text-align: center;
+  width: 24rem;
+}
+
+.boxed-view__form {
+  display: flex;
+  flex-direction: column;
+}
