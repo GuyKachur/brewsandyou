@@ -1,11 +1,41 @@
-import React, { Component } from "react";
+import React from "react";
+import {Accounts} from "meteor/accounts-base";
+import {Meteor} from "meteor/meteor";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect} from "react-router-dom";
 
-import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
+// import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
 
-export default class NavBar extends Component {
+export default class NavBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      redirectToHome: false,
+      redirectToLogin: false
+    };
+  }
+
+  onLogout(){
+    // this.setState({redirectToHome: true});
+    // this.setState({redirectToHome: true});
+    Accounts.logout();
+    // return this.props.history.push("/");
+  }
+
+  onLogin(){
+    // this.setState({redirectToLogin: true});
+    // return this.props.history.push("/login");
+  }
+
   render() {
+    if (this.state.redirectToLogin){
+      // this.setState({redirectToLogin: false});
+      return <Redirect to="/login" />;
+    }
+    if (this.state.redirectToHome){
+      // this.setState({redirectToHome: false});
+      return <Redirect to="/" />;
+    }
     return (
       <div className="">
         <nav className="navbar navbar-expand-md navbar-light">
@@ -60,7 +90,11 @@ export default class NavBar extends Component {
                 </li>
               </ul>
               <div className="md-form my-0">
-                <AccountsUIWrapper />;
+                {Meteor.user()
+                  ? <NavLink to="/" onClick={this.onLogout.bind(this)}>Logout</NavLink>
+                  : <NavLink to="/login">Login</NavLink>
+                }
+                {/*<AccountsUIWrapper />;*/}
               </div>
             </div>
           </div>

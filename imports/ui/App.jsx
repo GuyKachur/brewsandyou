@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import MainTemplate from "./MainTemplate.jsx";
+import Login from "./Login.jsx";
+import Signup from "./Signup.jsx";
+import { Redirect } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 import { withTracker } from "meteor/react-meteor-data";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+const history = createBrowserHistory();
+// console.log("Browser path: ", createBrowserHistory().location.pathname);
+const unauthenticatedPages = ["/login", "/signup"];
+const authenticatedPages = ["/account"];
 
 const HomeComponent = () => {
   return (
@@ -37,6 +46,53 @@ const NotFoundPage = () => (
   </div>
 );
 
+const UserAccount = () => (
+  <div>
+    <h1>Edit User Account Stuff</h1>
+    <p>{Meteor.userId()}</p>
+  </div>
+);
+
+function PrivateRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        Meteor.userId() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+
+function PublicRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !Meteor.userId() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/account",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +108,11 @@ class App extends Component {
         <MainTemplate>
           <Switch>
             <Route exact path="/" component={HomeComponent} />
+            <PublicRoute exact path="/login" component={Login} />
+            <PublicRoute exact path="/signup" component={Signup} />
             <Route exact path="/about" component={AboutComponent} />
             <Route exact path="/search" component={SearchComponent} />
+            <PrivateRoute exact path="/account" component={UserAccount} />
             <Route component={NotFoundPage} />
           </Switch>
         </MainTemplate>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Meteor } from "meteor/meteor";
+import { Accounts } from "meteor/accounts-base";
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +24,11 @@ export default class Login extends React.Component {
     let email = this.state.email.trim();
     let password = this.state.password.trim();
 
-    Meteor.loginWithPassword({ email }, password, err => {
-      console.log("Login callback", err);
+    Accounts.createUser({ email, password }, err => {
+      console.log("Signup callback", err);
     });
+
     this.setState({ redirectToHome: true });
-    // console.log("Email: ", email, " Pass: ", password);
   }
 
   render() {
@@ -37,7 +37,7 @@ export default class Login extends React.Component {
     }
     return (
       <div>
-        <h1>Login</h1>
+        <h1>Join Brews and You</h1>
 
         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
@@ -56,10 +56,10 @@ export default class Login extends React.Component {
             name="password"
             placeholder="Password"
           />
-          <button>Login</button>
+          <button>Create Account</button>
         </form>
 
-        <Link to="/signup">Need an account?</Link>
+        <Link to="/login">Already have an account?</Link>
       </div>
     );
   }
