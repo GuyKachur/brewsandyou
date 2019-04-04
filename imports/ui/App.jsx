@@ -17,7 +17,8 @@ import CompleteSearchBar from "./CompleteSearchBar.jsx";
 const HomeComponent = () => {
   return (
     <div className="container text-center">
-      {Meteor.user() ? <LandingPage /> : <p>Please log in</p>}
+      {/*{Meteor.user() ? <LandingPage /> : <p>Please log in</p>}*/}
+      <LandingPage />
     </div>
   );
 };
@@ -26,7 +27,8 @@ const SearchComponent = () => {
   return (
     <div className="container col-md-8 col-lg-6">
       <div className=" container text-center">
-        {Meteor.user() ? <CompleteSearchBar /> : <p>Please log in</p>}
+        {/*{Meteor.user() ? <CompleteSearchBar /> : <p>Please log in</p>}*/}
+        <CompleteSearchBar />
       </div>
     </div>
   );
@@ -48,10 +50,10 @@ const NotFoundPage = () => (
 const UserAccount = () => {
   // const user = Meteor.users.findOne(Meteor.userId());
   // const email = user.emails[0].address;
-  console.log(
-    "Email: ",
-    Meteor.users.findOne(Meteor.userId()).emails[0].address
-  );
+  // console.log(
+  //   "Email: ",
+  //   Meteor.users.findOne(Meteor.userId()).emails[0].address
+  // );
   return (
     <div>
       <h1>Edit User Account Stuff</h1>

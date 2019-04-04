@@ -611,10 +611,10 @@ class CompleteSearchBar extends Component {
             breweries={this.state.breweries}
             onClick={this.onListClick}
           />
-          <BrewMapContainer
+          {/*<BrewMapContainer
             brewery={this.state.brewery}
             breweries={this.state.breweries.flat()}
-          />
+          />*/}
         </div>
       </div>
     );
@@ -623,10 +623,7 @@ class CompleteSearchBar extends Component {
 //onClick={this.onListClick()}
 
 CompleteSearchBar.propTypes = {
-  breweries: PropTypes.oneOf([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object
-  ]),
+  breweries: PropTypes.arrayOf(PropTypes.object),
   brewery: PropTypes.object
 };
 
