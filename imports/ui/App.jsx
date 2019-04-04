@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
+import { withTracker } from "meteor/react-meteor-data";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+
 import MainTemplate from "./MainTemplate.jsx";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
-import { Redirect } from "react-router-dom";
-// import { createBrowserHistory } from "history";
-import { HTTP } from "meteor/http";
-
-import { withTracker } from "meteor/react-meteor-data";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LandingPage from "./LandingPage.jsx";
+import CompleteSearchBar from "./CompleteSearchBar.jsx";
 
 const HomeComponent = () => {
   return (
     <div className="container text-center">
-      {Meteor.user() ? <div>Hello </div> : <p>Please log in</p>}
+      {Meteor.user() ? <LandingPage /> : <p>Please log in</p>}
     </div>
   );
 };
@@ -23,7 +26,7 @@ const SearchComponent = () => {
   return (
     <div className="container col-md-8 col-lg-6">
       <div className=" container text-center">
-        {Meteor.user() ? <div>search </div> : <p>Please log in</p>}
+        {Meteor.user() ? <CompleteSearchBar /> : <p>Please log in</p>}
       </div>
     </div>
   );
@@ -45,7 +48,10 @@ const NotFoundPage = () => (
 const UserAccount = () => {
   // const user = Meteor.users.findOne(Meteor.userId());
   // const email = user.emails[0].address;
-  console.log("Email: ", Meteor.users.findOne(Meteor.userId()).emails[0].address);
+  console.log(
+    "Email: ",
+    Meteor.users.findOne(Meteor.userId()).emails[0].address
+  );
   return (
     <div>
       <h1>Edit User Account Stuff</h1>
