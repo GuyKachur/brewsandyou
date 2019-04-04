@@ -54,25 +54,38 @@ class BrewMapContainer extends Component {
   }
 
   getLocation(incomingBrewery) {
-    let address =
-      incomingBrewery.brewery.street +
-      "," +
-      incomingBrewery.brewery.city +
-      "," +
-      incomingBrewery.brewery.state;
-    //3150 Polk St, San Francisco, CA 94109
-    Meteor.call("address.location", address, (err, res) => {
-      if (err) {
-        //alert("There was error check the console");
-        console.log(err);
-        return;
-      }
-      if (res) {
-        //alert("There was error check the console");
-        //  console.log("getLocation", res);
-        this.setState({ location: res });
-      }
-    });
+    if (
+      incomingBrewery.brewery.longitude === null ||
+      incomingBrewery.brewery.latitude === null
+    ) {
+      let address =
+        incomingBrewery.brewery.street +
+        "," +
+        incomingBrewery.brewery.city +
+        "," +
+        incomingBrewery.brewery.state;
+      //3150 Polk St, San Francisco, CA 94109
+      Meteor.call("address.location", address, (err, res) => {
+        if (err) {
+          //alert("There was error check the console");
+          console.log(err);
+          return;
+        }
+        if (res) {
+          //alert("There was error check the console");
+          //  console.log("getLocation", res);
+          this.setState({ location: res });
+          return { locaiton: res };
+        }
+      });
+    } else {
+      return {
+        location: {
+          lat: incomingBrewery.brewery.latitude,
+          lng: incomingBrewery.brewery.longitude
+        }
+      };
+    }
   }
 
   //// TODO: adding the ability for the map to make calls against the brewery database for locations close to the location....
@@ -82,7 +95,7 @@ class BrewMapContainer extends Component {
         breweries={this.props.breweries}
         location={this.getLocation(this.props.brewery)}
         googleMapURL={
-          "https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&v=3.exp&libraries=geometry,drawing,places"
+          "https://maps.googleapis.com/maps/api/js?key=APIKEY&v=3.exp&libraries=geometry,drawing,places"
         }
         loadingElement={<div style={{ height: "100%" }} />}
         containerElement={<div style={{ height: "600px", width: "100%" }} />}
