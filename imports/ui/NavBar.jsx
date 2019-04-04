@@ -1,13 +1,13 @@
 import React from "react";
-import {Accounts} from "meteor/accounts-base";
-import {Meteor} from "meteor/meteor";
+import { Accounts } from "meteor/accounts-base";
+import { Meteor } from "meteor/meteor";
 
-import { NavLink, Redirect} from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 
 // import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
 
 export default class NavBar extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       redirectToHome: false,
@@ -15,24 +15,24 @@ export default class NavBar extends React.Component {
     };
   }
 
-  onLogout(){
+  onLogout() {
     // this.setState({redirectToHome: true});
     // this.setState({redirectToHome: true});
     Accounts.logout();
     // return this.props.history.push("/");
   }
 
-  onLogin(){
+  onLogin() {
     // this.setState({redirectToLogin: true});
     // return this.props.history.push("/login");
   }
 
   render() {
-    if (this.state.redirectToLogin){
+    if (this.state.redirectToLogin) {
       // this.setState({redirectToLogin: false});
       return <Redirect to="/login" />;
     }
-    if (this.state.redirectToHome){
+    if (this.state.redirectToHome) {
       // this.setState({redirectToHome: false});
       return <Redirect to="/" />;
     }
@@ -90,10 +90,18 @@ export default class NavBar extends React.Component {
                 </li>
               </ul>
               <div className="md-form my-0">
-                {Meteor.user()
-                  ? <NavLink to="/" onClick={this.onLogout.bind(this)}>Logout</NavLink>
-                  : <NavLink to="/login">Login</NavLink>
-                }
+                {Meteor.user() ? (
+                  <span>
+                    <NavLink to="/account">
+                      {Meteor.users.findOne(Meteor.userId()).emails[0].address}
+                    </NavLink>{" "}
+                    <NavLink to="/" onClick={this.onLogout.bind(this)}>
+                      Logout
+                    </NavLink>
+                  </span>
+                ) : (
+                  <NavLink to="/login">Login</NavLink>
+                )}
                 {/*<AccountsUIWrapper />;*/}
               </div>
             </div>

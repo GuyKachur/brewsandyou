@@ -4,16 +4,12 @@ import MainTemplate from "./MainTemplate.jsx";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import { Redirect } from "react-router-dom";
-import { createBrowserHistory } from "history";
+// import { createBrowserHistory } from "history";
+import { HTTP } from "meteor/http";
 
 import { withTracker } from "meteor/react-meteor-data";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-const history = createBrowserHistory();
-// console.log("Browser path: ", createBrowserHistory().location.pathname);
-const unauthenticatedPages = ["/login", "/signup"];
-const authenticatedPages = ["/account"];
 
 const HomeComponent = () => {
   return (
@@ -46,12 +42,17 @@ const NotFoundPage = () => (
   </div>
 );
 
-const UserAccount = () => (
-  <div>
-    <h1>Edit User Account Stuff</h1>
-    <p>{Meteor.userId()}</p>
-  </div>
-);
+const UserAccount = () => {
+  // const user = Meteor.users.findOne(Meteor.userId());
+  // const email = user.emails[0].address;
+  console.log("Email: ", Meteor.users.findOne(Meteor.userId()).emails[0].address);
+  return (
+    <div>
+      <h1>Edit User Account Stuff</h1>
+      <p>{Meteor.userId()}</p>
+    </div>
+  );
+};
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (
@@ -73,7 +74,7 @@ function PrivateRoute({ component: Component, ...rest }) {
   );
 }
 
-function PublicRoute({ component: Component, ...rest }) {
+function ProtectedRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
@@ -108,8 +109,8 @@ class App extends Component {
         <MainTemplate>
           <Switch>
             <Route exact path="/" component={HomeComponent} />
-            <PublicRoute exact path="/login" component={Login} />
-            <PublicRoute exact path="/signup" component={Signup} />
+            <ProtectedRoute exact path="/login" component={Login} />
+            <ProtectedRoute exact path="/signup" component={Signup} />
             <Route exact path="/about" component={AboutComponent} />
             <Route exact path="/search" component={SearchComponent} />
             <PrivateRoute exact path="/account" component={UserAccount} />
