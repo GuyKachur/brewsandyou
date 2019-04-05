@@ -29,7 +29,7 @@ $ meteor
 ## Links
 
 - [Website](https://brewsandyou.herokuapp.com/)
-- [Demo Video]
+- [Demo Video](https://www.youtube.com/watch?v=0ccW6rIgb1w&feature=youtu.be)
 - [Slides](https://docs.google.com/presentation/d/1EP9UOo2u6HPyq8e04K04H-uBRg0l7IoKC8SXiYm1Kvw/edit?usp=sharing)
 - [CS5610 Website](http://johnguerra.co/classes/webDevelopment_spring_2019/)
 
