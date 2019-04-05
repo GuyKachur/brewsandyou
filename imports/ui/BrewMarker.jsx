@@ -28,6 +28,7 @@ class BrewMarker extends Component {
   }
 
   render() {
+    //  console.log("BREWMARKERPROPS", this.props);
     return (
       <div>
         <Marker
@@ -45,7 +46,7 @@ BrewMarker.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   website_url: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   brewery: PropTypes.object.isRequired
 };
 

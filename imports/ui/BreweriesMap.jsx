@@ -9,13 +9,18 @@ import BrewMarker from "./BrewMarker.jsx";
 
 const BreweriesMap = withScriptjs(
   withGoogleMap(props => {
-    const markers = props.breweries.flat().map(brewery => {
+    console.log("BREWEIREISMAPPROPS", props);
+    const markers = props.breweries.map(brewery => {
       let marker = (
         <BrewMarker
           id={brewery.brewery.id}
-          name={brewery.brewery.title}
+          key={brewery.id}
+          name={brewery.brewery.name}
           website_url={brewery.brewery.website_url}
-          location={brewery.brewery.location}
+          location={{
+            lat: parseFloat(brewery.brewery.latitude),
+            lng: parseFloat(brewery.brewery.longitude)
+          }}
           activeMarker={
             brewery.brewery.id === props.activeMarker ? true : false
           }

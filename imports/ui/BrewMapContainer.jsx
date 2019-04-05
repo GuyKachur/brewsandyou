@@ -53,49 +53,60 @@ class BrewMapContainer extends Component {
     alert("You clicked it");
   }
 
-  getLocation(incomingBrewery) {
-    if (
-      incomingBrewery.brewery.longitude === null ||
-      incomingBrewery.brewery.latitude === null
-    ) {
-      let address =
-        incomingBrewery.brewery.street +
-        "," +
-        incomingBrewery.brewery.city +
-        "," +
-        incomingBrewery.brewery.state;
-      //3150 Polk St, San Francisco, CA 94109
-      Meteor.call("address.location", address, (err, res) => {
-        if (err) {
-          //alert("There was error check the console");
-          console.log(err);
-          return;
-        }
-        if (res) {
-          //alert("There was error check the console");
-          //  console.log("getLocation", res);
-          this.setState({ location: res });
-          return { locaiton: res };
-        }
-      });
-    } else {
-      return {
-        location: {
-          lat: incomingBrewery.brewery.latitude,
-          lng: incomingBrewery.brewery.longitude
-        }
-      };
-    }
-  }
+  // getLocation(incomingBrewery) {
+  //   console.log("INCOMINGBREWERY", incomingBrewery);
+  //   if (
+  //     incomingBrewery.brewery.longitude === null ||
+  //     incomingBrewery.brewery.longitude === "" ||
+  //     incomingBrewery.brewery.longitude === undefined ||
+  //     incomingBrewery.brewery.latitude === null ||
+  //     incomingBrewery.brewery.latitude === "" ||
+  //     incomingBrewery.brewery.latitude === undefined
+  //   ) {
+  //     let address =
+  //       incomingBrewery.brewery.street +
+  //       "," +
+  //       incomingBrewery.brewery.city +
+  //       "," +
+  //       incomingBrewery.brewery.state;
+  //     //3150 Polk St, San Francisco, CA 94109
+  //     Meteor.call("address.location", address, (err, res) => {
+  //       if (err) {
+  //         //alert("There was error check the console");
+  //         console.log(err);
+  //         return;
+  //       }
+  //       if (res) {
+  //         //alert("There was error check the console");
+  //         //  console.log("getLocation", res);
+  //         let lati = parseFloat(res.latitude);
+  //         let longi = parseFloat(res.longitude);
+  //         console.log("LATILONGGOOGLE", lati, longi);
+  //         this.setState({ location: { lat: lati, lng: longi } });
+  //         return { lat: lati, lng: longi };
+  //       }
+  //     });
+  //   } else {
+  //     return {
+  //       lat: parseFloat(incomingBrewery.brewery.latitude),
+  //       lng: parseFloat(incomingBrewery.brewery.longitude)
+  //     };
+  //   }
+  // }
 
   //// TODO: adding the ability for the map to make calls against the brewery database for locations close to the location....
   render() {
+    console.log("BREWMAPCONTAINERPROPS", this.props);
+    console.log("BREWERY LAT LNG", this.props.brewery);
     return (
       <BreweriesMap
         breweries={this.props.breweries}
-        location={this.getLocation(this.props.brewery)}
+        location={{
+          lat: this.props.brewery.brewery.latitude,
+          lng: this.props.brewery.brewery.longitude
+        }}
         googleMapURL={
-          "https://maps.googleapis.com/maps/api/js?key=APIKEY&v=3.exp&libraries=geometry,drawing,places"
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyD9QZC8QrVnxhjlzO4mtMDlD4S7ei0DGnY&v=3.exp&libraries=geometry,drawing,places"
         }
         loadingElement={<div style={{ height: "100%" }} />}
         containerElement={<div style={{ height: "600px", width: "100%" }} />}
