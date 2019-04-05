@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Foot extends Component {
   render() {
     return (
-      <footer className="bg-light">
+      <footer className="bg-light" >
         <div className="container p-5">
           <div className="row">
             <div className="col-lg-4 col-sm-6">

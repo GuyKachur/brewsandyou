@@ -95,6 +95,7 @@ class LandingPage extends Component {
 
     return (
       <div>
+        <h1>Welcome!</h1>
         <Carousel
           activeIndex={activeIndex}
           next={this.next}

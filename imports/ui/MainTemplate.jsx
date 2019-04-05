@@ -6,7 +6,7 @@ import Foot from "./Foot.jsx";
 export default class MainTemplate extends Component {
   render() {
     return (
-      <div>
+      <div role="main">
         <NavBar />
 
         {this.props.children}

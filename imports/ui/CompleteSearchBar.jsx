@@ -473,6 +473,7 @@ class CompleteSearchBar extends Component {
     };
     return (
       <div className="mb-4">
+        <h1>Search</h1>
         <Autosuggest
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
