@@ -3,7 +3,7 @@ import { Meteor } from "meteor/meteor";
 import { HTTP } from "meteor/http";
 
 export const Breweries = new Mongo.Collection("Breweries");
-const GOOGLE_API_KEY = "fjkdahkfj";
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 if (Meteor.isServer) {
   Meteor.publish("Breweries", function breweriesToPublish() {
@@ -44,9 +44,9 @@ Meteor.methods({
           "https://maps.googleapis.com/maps/api/geocode/json",
           { params: params }
         );
-        //console.log(response.content);
+        console.log("RESPONSEFROMGOOGLE", response.content);
         let fullJSON = JSON.parse(response.content);
-        //  console.log("ADDRESSS LOCATION PARSE JSON");
+        console.log("ADDRESSS LOCATION PARSE JSON", fullJSON);
         //console.log(fullJSON);
         return fullJSON.results[0].geometry.location;
       } catch (e) {
@@ -55,29 +55,82 @@ Meteor.methods({
     }
   }
 });
+//retruns location
+function addressToLocaiton(streetAddress) {
+  if (Meteor.isServer) {
+    try {
+      let params = { address: streetAddress, key: GOOGLE_API_KEY };
+      let response = HTTP.call(
+        "GET",
+        "https://maps.googleapis.com/maps/api/geocode/json",
+        { params: params }
+      );
+      console.log("RESPONSEFROMGOOGLE", response.content);
+      let fullJSON = JSON.parse(response.content);
+      console.log("ADDRESSS LOCATION PARSE JSON", fullJSON);
+      //console.log(fullJSON);
 
-// function getFromAPI(location) {
-//   //gran from API with a location with latlong
-//   //// TODO: options callback: called when request is completed
-//   // HTTP.get(API_URL + location, options, callback)
-//   //   .then(data => data.json())
-//   //   .then(jsonData => this.setState({ breweries: jsonData.breweries }))
-//   //   .catch(err => this.setState({ error: err }));
-//
-//   //we must take a location
-//   HTTP.call(
-//     "GET",
-//     "https://api.openbrewerydb.org/breweries/autocomplete",
-//     { params: params },
-//     (error, result) => {
-//       if (error) {
-//         console.log("error in get: ", error);
-//       } else {
-//         return JSON.parse(result.content);
-//       }
-//     }
-//   );
-// }
+      let res = fullJSON.results[0].geometry.location;
+
+      let lati = parseFloat(res.lat);
+      let longi = parseFloat(res.lng);
+
+      console.log("LATILONGGOOGLE", lati, longi);
+      return { lat: lati, lng: longi };
+    } catch (e) {
+      console.log("address error" + e);
+    }
+  }
+}
+
+function validateBrewery(breweryToBeValidated) {
+  if (Meteor.isServer) {
+    let invalidBrewery = {
+      id: 99999999,
+      name: "_Brewing",
+      brewery_type: "unknown",
+      street: "34800 Bob Wilson Dr",
+      city: "San Diego",
+      state: "CA",
+      postal_code: "92134",
+      country: "United States",
+      longitude: "-117.1596557",
+      latitude: "32.7078239",
+      phone: "",
+      website_url: "http://www.yesnoif.com",
+      updated_at: "2018-08-23T23:26:25.248Z",
+      tag_list: []
+    };
+
+    if (
+      !breweryToBeValidated.street ||
+      !breweryToBeValidated.city ||
+      !breweryToBeValidated.state
+    ) {
+      return invalidBrewery;
+    } else {
+      //this brewery has a state city and
+
+      if (!breweryToBeValidated.longitude || !breweryToBeValidated.latitude) {
+        let address =
+          breweryToBeValidated.street +
+          "," +
+          breweryToBeValidated.city +
+          "," +
+          breweryToBeValidated.state;
+        let location = addressToLocaiton(address);
+        breweryToBeValidated.locaiton = location;
+        breweryToBeValidated.longitude = location.lng;
+        breweryToBeValidated.latitude = location.lat;
+      }
+      breweryToBeValidated.longitude = parseFloat(
+        breweryToBeValidated.longitude
+      );
+      breweryToBeValidated.latitude = parseFloat(breweryToBeValidated.latitude);
+      return breweryToBeValidated;
+    }
+  }
+}
 
 function collateBrewery(brewery) {
   if (Meteor.isServer) {
@@ -85,17 +138,19 @@ function collateBrewery(brewery) {
     const databaseBrewery = Breweries.find({ id: brewery.id }).fetch();
     if (databaseBrewery.length === 0) {
       //brewery wasnt found in database, insert database
+      let sanitizedBrewery = validateBrewery(brewery);
       Breweries.insert({
         createdAt: Date.now(),
-        brewery: brewery,
+        brewery: sanitizedBrewery,
         id: brewery.id,
         comments: [],
         rating: 0
       });
-      return Breweries.find({ id: brewery.id }).fetch();
+      let returnME = Breweries.find({ id: brewery.id }).fetch();
+      return returnME[0];
     } else {
       //brewery was found, grab comments
-      return databaseBrewery;
+      return databaseBrewery[0];
     }
   }
 
@@ -140,16 +195,20 @@ Meteor.methods({
 
 //returns the brewery based on ID
 Meteor.methods({
-  "breweries.breweryID"(brewery) {
+  "breweries.breweryID"(breweryID) {
     if (Meteor.isServer) {
-      // Make sure the user is logged in before inserting a task
+      console.log("FROM BREWERY ID METHOD", breweryID);
       try {
         let response = HTTP.call(
           "GET",
-          "https://api.openbrewerydb.org/breweries/",
-          { params: brewery.id }
+          "https://api.openbrewerydb.org/breweries/" + breweryID
         );
-        collateBrewery(JSON.parse(response.content));
+        console.log("Returned this ONE brewery hopefully", response.content);
+        //grab brewery from database, if not in database add to database w/location
+
+        let returnBrewery = collateBrewery(JSON.parse(response.content));
+        console.log("RETURNEDBREWERY", returnBrewery);
+        return returnBrewery;
       } catch (e) {
         console.log("breweryID error" + e);
       }
@@ -169,30 +228,15 @@ Meteor.methods({
           {
             params: { by_city: incomingCity.city, by_state: incomingCity.state }
           }
-          // (error, result) => {
-          //   if (error) {
-          //     console.log("error in get: ", error);
-          //   } else {
-          //     console.log("CITY STATE FUNCTION");
-          //     console.log(result);
-          //     let resultList = [];
-          //     JSON.parse(result.content).map(brewery =>
-          //       resultList.push(collateBrewery(brewery))
-          //     );
-          //
-          //     console.log(resultList);
-          //     return resultList;
-          //   }
-          // }
         );
         let resultList = [];
-        //console.log("RESPONSE" + response);
+        console.log("RESPONSE" + response);
 
-        //  console.log("DATA" + response.content);
+        console.log("DATA" + response.content);
         JSON.parse(response.content).map(brewery =>
           resultList.push(collateBrewery(brewery))
         );
-        //console.log(resultList);
+        console.log(resultList);
         return resultList;
       } catch (e) {
         console.log("http request error log" + e);

@@ -38,9 +38,10 @@ class BreweriesList extends Component {
   }
 
   render() {
-    console.log("FLATTEND ARRAY " + this.props.breweries.flat());
-    const breweryCards = this.props.breweries.flat().map(brewery => {
-      console.log("BREWERY IN BREWERY CARD" + brewery);
+    console.log("LISTPROPS", this.props);
+    //console.log("FLATTEND ARRAY " + this.props.breweries.flat());
+    const breweryCards = this.props.breweries.map(brewery => {
+      //console.log("BREWERY IN BREWERY CARD" + brewery);
       let breweryCard = (
         <BreweryCard
           key={brewery.id}
@@ -57,7 +58,7 @@ class BreweriesList extends Component {
 }
 
 BreweriesList.propTypes = {
-  breweries: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)).isRequired,
+  breweries: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func
 };
 

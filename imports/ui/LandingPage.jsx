@@ -7,14 +7,26 @@ import {
   CarouselCaption
 } from "reactstrap";
 
+//https://en.wikipedia.org/wiki/File:Stone_Brewing_Co._Year_Round_Beers.jpg
+
 const items = [
   {
-    src: "./images/1280px-Stone_Brewing_Co._Year_Round_Beers.jpg",
+    src:
+      "https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/Stone_Brewing_Co._Year_Round_Beers.jpg/800px-Stone_Brewing_Co._Year_Round_Beers.jpg",
     altText: "Stone Brewing",
     caption: "A beer on a bar"
   },
   {
-    src: "./images/14039718059_975070bc96_o.jpg",
+    //https://commons.wikimedia.org/wiki/File:Green_Beacon_Brewing_Company_08.jpg
+    src:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Green_Beacon_Brewing_Company_08.jpg/799px-Green_Beacon_Brewing_Company_08.jpg",
+    altText: "A flight of beers",
+    caption: "A flight of beers"
+  },
+  {
+    //https://www.pexels.com/photo/three-10-barrel-brewing-glasses-full-of-beer-1267681/
+    src:
+      "https://images.pexels.com/photos/1267681/pexels-photo-1267681.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
     altText: "A flight of beers",
     caption: "A flight of beers"
   }
@@ -82,28 +94,33 @@ class LandingPage extends Component {
     });
 
     return (
-      <Carousel
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-      >
-        <CarouselIndicators
-          items={items}
+      <div>
+        <Carousel
           activeIndex={activeIndex}
-          onClickHandler={this.goToIndex}
-        />
-        {slides}
-        <CarouselControl
-          direction="prev"
-          directionText="Previous"
-          onClickHandler={this.previous}
-        />
-        <CarouselControl
-          direction="next"
-          directionText="Next"
-          onClickHandler={this.next}
-        />
-      </Carousel>
+          next={this.next}
+          previous={this.previous}
+        >
+          <CarouselIndicators
+            items={items}
+            activeIndex={activeIndex}
+            onClickHandler={this.goToIndex}
+          />
+          {slides}
+          <CarouselControl
+            direction="prev"
+            directionText="Previous"
+            onClickHandler={this.previous}
+          />
+          <CarouselControl
+            direction="next"
+            directionText="Next"
+            onClickHandler={this.next}
+          />
+        </Carousel>
+        <div>
+          <p>This is where a blurb should go</p>{" "}
+        </div>
+      </div>
     );
   }
 }

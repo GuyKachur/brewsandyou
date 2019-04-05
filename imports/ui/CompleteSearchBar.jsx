@@ -13,408 +13,261 @@ const getSuggestionValue = suggestion => suggestion.name;
 const renderSuggestion = suggestion => (
   <div className="text-lg p-4">{suggestion.name}</div>
 );
-
-const hermitage = {
-  _id: "qK6EpaaSDEn3jEFmJ",
-  createdAt: 1554323537598,
-  brewery: {
+const sanJoseBreweries = [
+  {
+    _id: "yer9ihDCYziYEBAS5",
+    createdAt: 1554427487482,
+    brewery: {
+      id: 456,
+      name: "Camino Brewing Co LLC",
+      brewery_type: "micro",
+      street: "718 S 1st St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95113",
+      country: "United States",
+      longitude: -121.882347823612,
+      latitude: 37.3253017839889,
+      phone: "",
+      website_url: "http://www.caminobrewing.com",
+      updated_at: "2018-08-23T23:26:25.248Z",
+      tag_list: []
+    },
+    id: 456,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "xiAY8xRKKgfs6Sy2N",
+    createdAt: 1554427487493,
+    brewery: {
+      id: 623,
+      name: "Geartooth AleWerks",
+      brewery_type: "micro",
+      street: "1635 S 7th St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95112-5932",
+      country: "United States",
+      longitude: -121.866477333785,
+      latitude: 37.315251291037,
+      phone: "4084832679",
+      website_url: "http://www.geartoothalewerks.com",
+      updated_at: "2018-08-23T23:28:45.233Z",
+      tag_list: []
+    },
+    id: 623,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "YuexL9FioGnnoLCqn",
+    createdAt: 1554427487496,
+    brewery: {
+      id: 667,
+      name: "Hermitage Brewing Company",
+      brewery_type: "regional",
+      street: "1627 S 7th St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95112-5932",
+      country: "United States",
+      longitude: -121.866525688348,
+      latitude: 37.3153140881948,
+      phone: "4082910966",
+      website_url: "http://www.hermitagebrewing.com",
+      updated_at: "2018-08-23T23:29:21.773Z",
+      tag_list: []
+    },
     id: 667,
-    name: "Hermitage Brewing Company",
-    brewery_type: "regional",
-    street: "1627 S 7th St",
-    city: "San Jose",
-    state: "California",
-    postal_code: "95112-5932",
-    country: "United States",
-    longitude: "-121.866525688348",
-    latitude: "37.3153140881948",
-    phone: "4082910966",
-    website_url: "http://www.hermitagebrewing.com",
-    updated_at: "2018-08-23T23:29:21.773Z",
-    tag_list: [],
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "pYN862GPBEvhbjHWG",
+    createdAt: 1554427487503,
+    brewery: {
+      id: 377,
+      name: "Bison Brewing Co",
+      brewery_type: "contract",
+      street: "1627 S 7th St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95112-5932",
+      country: "United States",
+      longitude: -121.866525688348,
+      latitude: 37.3153140881948,
+      phone: "5108125996",
+      website_url: "http://bisonbrew.com",
+      updated_at: "2018-08-23T23:25:25.802Z",
+      tag_list: []
+    },
+    id: 377,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "iBDDouW5uTLaMDPon",
+    createdAt: 1554427487506,
+    brewery: {
+      id: 441,
+      name: "Brewtality",
+      brewery_type: "contract",
+      street: "930 McLaughlin Ave",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95122-2611",
+      country: "United States",
+      longitude: -121.8541694,
+      latitude: 37.3331712,
+      phone: "3104023349",
+      website_url: "http://www.brewtality.com",
+      updated_at: "2018-08-23T23:26:12.593Z",
+      tag_list: []
+    },
+    id: 441,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "2TdcCWG4wTQTWPRJK",
+    createdAt: 1554427487514,
+    brewery: {
+      id: 636,
+      name: "Gordon Biersch Brewing Co",
+      brewery_type: "regional",
+      street: "357 E Taylor St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95112-3105",
+      country: "United States",
+      longitude: -121.8841169,
+      latitude: 37.3567304,
+      phone: "4082781008",
+      website_url: "http://www.gordonbiersch.com",
+      updated_at: "2018-08-23T23:28:56.213Z",
+      tag_list: []
+    },
+    id: 636,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "vkaW2LyyDrpfRt3at",
+    createdAt: 1554427487517,
+    brewery: {
+      id: 655,
+      name: "Hapa's Brewing Company",
+      brewery_type: "micro",
+      street: "460 Lincoln Ave # 90",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95126-3702",
+      country: "United States",
+      longitude: -121.888991,
+      latitude: 37.2917841,
+      phone: "4089823299",
+      website_url: "http://hapasbrewing.com/",
+      updated_at: "2018-08-23T23:29:11.473Z",
+      tag_list: []
+    },
+    id: 655,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "akREwgnaKuJ365zF8",
+    createdAt: 1554427487522,
+    brewery: {
+      id: 985,
+      name: "Santa Clara Valley Brewing",
+      brewery_type: "micro",
+      street: "101 E Alma Ave",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95112-5944",
+      country: "United States",
+      longitude: -121.873871843909,
+      latitude: 37.3163530780456,
+      phone: "4082885181",
+      website_url: "http://www.scvbrewing.com",
+      updated_at: "2018-08-24T00:02:06.427Z",
+      tag_list: []
+    },
+    id: 985,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "HhgscvRPW6vyzND3R",
+    createdAt: 1554427487524,
+    brewery: {
+      id: 1033,
+      name: "South Bay Brewco",
+      brewery_type: "contract",
+      street: "930 McLaughlin Ave",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95122-2611",
+      country: "United States",
+      longitude: -121.8541694,
+      latitude: 37.3331712,
+      phone: "4082193696",
+      website_url: "",
+      updated_at: "2018-08-24T00:02:50.318Z",
+      tag_list: []
+    },
+    id: 1033,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "p9jsqJ4G8caTFAXht",
+    createdAt: 1554427487531,
+    brewery: {
+      id: 1157,
+      name: "Uproar Brewing",
+      brewery_type: "brewpub",
+      street: "439 S 1st St",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95113-2816",
+      country: "United States",
+      longitude: -121.885637335649,
+      latitude: 37.329391892769,
+      phone: "4086732266",
+      website_url: "http://www.uproarbrewing.com",
+      updated_at: "2018-08-24T00:04:40.236Z",
+      tag_list: []
+    },
+    id: 1157,
+    comments: [],
+    rating: 0
+  },
+  {
+    _id: "J6EMxQp7t9FM2MyuG",
+    createdAt: 1554427487533,
+    brewery: {
+      id: 1171,
+      name: "Whole Foods Market Brewing Company- Floodcraft Brewing",
+      brewery_type: "brewpub",
+      street: "777 The Alameda",
+      city: "San Jose",
+      state: "California",
+      postal_code: "95126-3155",
+      country: "United States",
+      longitude: -121.9087451,
+      latitude: 37.3315931,
+      phone: "4082071126",
+      website_url: "http://floodcraftbrewing.com/",
+      updated_at: "2018-08-24T00:04:53.123Z",
+      tag_list: []
+    },
+    id: 1171,
     comments: [],
     rating: 0
   }
-};
-
-const sanJoseBreweryList = [
-  [
-    {
-      _id: "ci7xJLKPuRWrbgJ7o",
-      createdAt: 1554338072908,
-      brewery: {
-        id: 456,
-        name: "Camino Brewing Co LLC",
-        brewery_type: "micro",
-        street: "718 S 1st St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95113",
-        country: "United States",
-        longitude: "-121.882347823612",
-        latitude: "37.3253017839889",
-        phone: "",
-        website_url: "http://www.caminobrewing.com",
-        updated_at: "2018-08-23T23:26:25.248Z",
-        tag_list: []
-      },
-      id: 456,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "9QwhHnowLM6ZN84Cu",
-      createdAt: 1554338072922,
-      brewery: {
-        id: 623,
-        name: "Geartooth AleWerks",
-        brewery_type: "micro",
-        street: "1635 S 7th St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-5932",
-        country: "United States",
-        longitude: "-121.866477333785",
-        latitude: "37.315251291037",
-        phone: "4084832679",
-        website_url: "http://www.geartoothalewerks.com",
-        updated_at: "2018-08-23T23:28:45.233Z",
-        tag_list: []
-      },
-      id: 623,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "mzv8im6A9XRCsHkWH",
-      createdAt: 1554338072935,
-      brewery: {
-        id: 667,
-        name: "Hermitage Brewing Company",
-        brewery_type: "regional",
-        street: "1627 S 7th St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-5932",
-        country: "United States",
-        longitude: "-121.866525688348",
-        latitude: "37.3153140881948",
-        phone: "4082910966",
-        website_url: "http://www.hermitagebrewing.com",
-        updated_at: "2018-08-23T23:29:21.773Z",
-        tag_list: []
-      },
-      id: 667,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "fzfRDFRFMGXSBPzay",
-      createdAt: 1554338072944,
-      brewery: {
-        id: 294,
-        name: "Ale House Brewing Co",
-        brewery_type: "micro",
-        street: "",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95118-1605",
-        country: "United States",
-        longitude: "-121.8905833",
-        latitude: "37.3361905",
-        phone: "4083907574",
-        website_url: "",
-        updated_at: "2018-08-23T23:24:07.379Z",
-        tag_list: []
-      },
-      id: 294,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "QqLTg8zNEcLAKpKh4",
-      createdAt: 1554338072956,
-      brewery: {
-        id: 377,
-        name: "Bison Brewing Co",
-        brewery_type: "contract",
-        street: "1627 S 7th St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-5932",
-        country: "United States",
-        longitude: "-121.866525688348",
-        latitude: "37.3153140881948",
-        phone: "5108125996",
-        website_url: "http://bisonbrew.com",
-        updated_at: "2018-08-23T23:25:25.802Z",
-        tag_list: []
-      },
-      id: 377,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "mBbmNtApqjqo8x86B",
-      createdAt: 1554338072964,
-      brewery: {
-        id: 441,
-        name: "Brewtality",
-        brewery_type: "contract",
-        street: "930 McLaughlin Ave",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95122-2611",
-        country: "United States",
-        longitude: "-121.8541694",
-        latitude: "37.3331712",
-        phone: "3104023349",
-        website_url: "http://www.brewtality.com",
-        updated_at: "2018-08-23T23:26:12.593Z",
-        tag_list: []
-      },
-      id: 441,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "mjJNHnyM9WGS6wFn5",
-      createdAt: 1554338072978,
-      brewery: {
-        id: 484,
-        name: "Clandestine Brewing",
-        brewery_type: "micro",
-        street: "980 S 1st Ste B",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95110-3127",
-        country: "United States",
-        longitude: null,
-        latitude: null,
-        phone: "",
-        website_url: "http://www.clandestinebrewing.com",
-        updated_at: "2018-08-11T21:35:59.529Z",
-        tag_list: []
-      },
-      id: 484,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "aFsc98J5KzeS3NmwD",
-      createdAt: 1554338072986,
-      brewery: {
-        id: 636,
-        name: "Gordon Biersch Brewing Co",
-        brewery_type: "regional",
-        street: "357 E Taylor St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-3105",
-        country: "United States",
-        longitude: "-121.8841169",
-        latitude: "37.3567304",
-        phone: "4082781008",
-        website_url: "http://www.gordonbiersch.com",
-        updated_at: "2018-08-23T23:28:56.213Z",
-        tag_list: []
-      },
-      id: 636,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "erpvfKqoAMjCCMNLK",
-      createdAt: 1554338073002,
-      brewery: {
-        id: 655,
-        name: "Hapa's Brewing Company",
-        brewery_type: "micro",
-        street: "460 Lincoln Ave # 90",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95126-3702",
-        country: "United States",
-        longitude: "-121.888991",
-        latitude: "37.2917841",
-        phone: "4089823299",
-        website_url: "http://hapasbrewing.com/",
-        updated_at: "2018-08-23T23:29:11.473Z",
-        tag_list: []
-      },
-      id: 655,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "E4QZwHv2EyRrbQPdW",
-      createdAt: 1554338073039,
-      brewery: {
-        id: 824,
-        name: "Moksha Beer",
-        brewery_type: "contract",
-        street: "",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95154-0279",
-        country: "United States",
-        longitude: "-121.8905833",
-        latitude: "37.3361905",
-        phone: "4157295796",
-        website_url: "http://www.mokshabeer.com",
-        updated_at: "2018-08-23T23:59:40.005Z",
-        tag_list: []
-      },
-      id: 824,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "PcL9e3E6hWTRcvtxx",
-      createdAt: 1554338073081,
-      brewery: {
-        id: 985,
-        name: "Santa Clara Valley Brewing",
-        brewery_type: "micro",
-        street: "101 E Alma Ave",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-5944",
-        country: "United States",
-        longitude: "-121.873871843909",
-        latitude: "37.3163530780456",
-        phone: "4082885181",
-        website_url: "http://www.scvbrewing.com",
-        updated_at: "2018-08-24T00:02:06.427Z",
-        tag_list: []
-      },
-      id: 985,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "ttZQNa7PNpicNJXFZ",
-      createdAt: 1554338073170,
-      brewery: {
-        id: 1033,
-        name: "South Bay Brewco",
-        brewery_type: "contract",
-        street: "930 McLaughlin Ave",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95122-2611",
-        country: "United States",
-        longitude: "-121.8541694",
-        latitude: "37.3331712",
-        phone: "4082193696",
-        website_url: "",
-        updated_at: "2018-08-24T00:02:50.318Z",
-        tag_list: []
-      },
-      id: 1033,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "nb6cr2oK29RwDhSbv",
-      createdAt: 1554338073180,
-      brewery: {
-        id: 1064,
-        name: "Strike Brewing Co",
-        brewery_type: "micro",
-        street: "2099 S 10th St Unit 30",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95112-4116",
-        country: "United States",
-        longitude: null,
-        latitude: null,
-        phone: "6507146983",
-        website_url: "http://www.strikebrewingco.com",
-        updated_at: "2018-08-11T21:36:23.237Z",
-        tag_list: []
-      },
-      id: 1064,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "6Xa3B2PvxcKcT5qmi",
-      createdAt: 1554338073227,
-      brewery: {
-        id: 1157,
-        name: "Uproar Brewing",
-        brewery_type: "brewpub",
-        street: "439 S 1st St",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95113-2816",
-        country: "United States",
-        longitude: "-121.885637335649",
-        latitude: "37.329391892769",
-        phone: "4086732266",
-        website_url: "http://www.uproarbrewing.com",
-        updated_at: "2018-08-24T00:04:40.236Z",
-        tag_list: []
-      },
-      id: 1157,
-      comments: [],
-      rating: 0
-    }
-  ],
-  [
-    {
-      _id: "fW8zsLtGmJ8QhCy42",
-      createdAt: 1554338073247,
-      brewery: {
-        id: 1171,
-        name: "Whole Foods Market Brewing Company- Floodcraft Brewing",
-        brewery_type: "brewpub",
-        street: "777 The Alameda",
-        city: "San Jose",
-        state: "California",
-        postal_code: "95126-3155",
-        country: "United States",
-        longitude: "-121.9087451",
-        latitude: "37.3315931",
-        phone: "4082071126",
-        website_url: "http://floodcraftbrewing.com/",
-        updated_at: "2018-08-24T00:04:53.123Z",
-        tag_list: []
-      },
-      id: 1171,
-      comments: [],
-      rating: 0
-    }
-  ]
 ];
-
 class CompleteSearchBar extends Component {
   // updateBreweries(response) {
   //   console.log("udate reweroesd " + response);
@@ -443,9 +296,31 @@ class CompleteSearchBar extends Component {
 
     this.state = {
       value: "",
-      brewery: hermitage,
+      brewery: {
+        _id: "J6EMxQp7t9FM2MyuG",
+        createdAt: 1554427487533,
+        brewery: {
+          id: 1171,
+          name: "Whole Foods Market Brewing Company- Floodcraft Brewing",
+          brewery_type: "brewpub",
+          street: "777 The Alameda",
+          city: "San Jose",
+          state: "California",
+          postal_code: "95126-3155",
+          country: "United States",
+          longitude: -121.9087451,
+          latitude: 37.3315931,
+          phone: "4082071126",
+          website_url: "http://floodcraftbrewing.com/",
+          updated_at: "2018-08-24T00:04:53.123Z",
+          tag_list: []
+        },
+        id: 1171,
+        comments: [],
+        rating: 0
+      },
       suggestions: [], //list of brewery id's and names
-      breweries: sanJoseBreweryList //maybe .flat()
+      breweries: sanJoseBreweries //maybe .flat()
     };
   }
 
@@ -473,9 +348,13 @@ class CompleteSearchBar extends Component {
   // }
   componentDidUpdate(prevProps) {
     if (!this.compare(this.props.breweries, prevProps.breweries)) {
-      this.setState({
-        breweries: this.props.breweries
-      });
+      console.log(
+        "componenet did update, breweries werent a match",
+        prevProps.breweries
+      );
+      // this.setState({
+      //   breweries: this.props.breweries
+      // });
     }
     // if (!this.compare(this.props.brewery, prevProps.brewery)) {
     //   this.setState({ brewery: prevProps.brewery });
@@ -513,9 +392,8 @@ class CompleteSearchBar extends Component {
         return;
       }
 
-      console.log("autocomplete", res);
+      console.log("getsuggestions", res);
       this.setState({ suggestions: res });
-      //  this.updateBreweries(res);
     });
   }
 
@@ -538,21 +416,20 @@ class CompleteSearchBar extends Component {
 
   //suggestion will have id and name
   onSuggestionSelected(_event, { suggestion }) {
+    console.log("On suggestion selected", suggestion);
     Meteor.call("breweries.breweryID", suggestion.id, (err, res) => {
       if (err) {
         alert("There was error check the console");
         console.log(err);
         return;
       }
-      if (res) {
-        console.log("autocomplete", res);
-        this.setState({ brewery: res.data });
-        let cityLocation = {
-          city: res.data.city,
-          state: res.data.state
-        };
-        this.getOtherBreweries(cityLocation);
-      }
+      console.log("suggestion selected", res);
+      this.setState({ brewery: res });
+      let cityLocation = {
+        city: res.brewery.city,
+        state: res.brewery.state
+      };
+      this.getOtherBreweries(cityLocation);
     });
 
     //so we got a suggestion, now we have the brewry address
@@ -560,6 +437,7 @@ class CompleteSearchBar extends Component {
 
   //gets the breweries close to the chosen brewery
   getOtherBreweries(cityLocation) {
+    console.log("getOtherBreweries", cityLocation);
     Meteor.call("breweries.byCityState", cityLocation, (err, res) => {
       if (err) {
         alert("There was error check the console");
@@ -567,12 +445,9 @@ class CompleteSearchBar extends Component {
         return;
       }
 
-      console.log("autocomplete", res);
-      this.setState({ breweries: res.data });
-      //  this.updateBreweries(res);
+      console.log("getOtherBreweriesresponse", res);
+      this.setState({ breweries: res });
     });
-    // let response = Meteor.call("breweries.byCityState", cityLocation);
-    // this.setState({ breweries: response.data });
   }
 
   onListClick(updatedBrewery) {
@@ -585,6 +460,7 @@ class CompleteSearchBar extends Component {
   }
 
   render() {
+    console.log("COMPLETESEARCHBARPROPS", this.props);
     const { value } = this.state;
 
     const inputProps = {
@@ -594,7 +470,6 @@ class CompleteSearchBar extends Component {
       className:
         "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4"
     };
-
     return (
       <div className="mb-4">
         <Autosuggest
@@ -611,16 +486,15 @@ class CompleteSearchBar extends Component {
             breweries={this.state.breweries}
             onClick={this.onListClick}
           />
-          {/*<BrewMapContainer
+          <BrewMapContainer
             brewery={this.state.brewery}
-            breweries={this.state.breweries.flat()}
-          />*/}
+            breweries={this.state.breweries}
+          />
         </div>
       </div>
     );
   }
 }
-//onClick={this.onListClick()}
 
 CompleteSearchBar.propTypes = {
   breweries: PropTypes.arrayOf(PropTypes.object),
