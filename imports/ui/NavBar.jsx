@@ -13,10 +13,10 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <div className="">
-        <nav className="navbar navbar-expand-md navbar-light">
+        <nav className="navbar navbar-expand-sm navbar-light">
           <div className="container">
             <NavLink className="navbar-brand" to="/">
-              Brews & You
+              Brews <span id="ampColor">&</span> <span id="youColor">You</span>
             </NavLink>
             <button
               className="navbar-toggler"
@@ -39,16 +39,6 @@ export default class NavBar extends React.Component {
                   <NavLink
                     className="nav-link"
                     activeClassName="active"
-                    exact={true}
-                    to="/"
-                  >
-                    Home
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    activeClassName="active"
                     to="/search"
                   >
                     Search
@@ -64,7 +54,6 @@ export default class NavBar extends React.Component {
                   </NavLink>
                 </li>
               </ul>
-
               <div className="md-form my-0">
                 {Meteor.user() ? (
                   <span>
@@ -72,10 +61,10 @@ export default class NavBar extends React.Component {
                       <Dropdown.Toggle
                         className="p-1 m-0"
                         id="dropdown-custom-1"
-                        variant="outline-primary"
+                        variant="outline-light"
                       >
                         <img
-                          className="bg-light rounded-circle"
+                          className="rounded-circle"
                           height="30px"
                           width="30px"
                           src={`https://robohash.org/${

@@ -14,7 +14,7 @@ body {
   background-color: $body-background-color;
   color: $body-default-color;
   font-family: $body-default-font-family;
-  font-size: $base-font-size;
+  // font-size: $base-font-size;
 }
 
 h1 {
@@ -31,10 +31,6 @@ p {
   margin-bottom: $space;
 }
 
-a {
-  color: $body-default-color;
-}
-
 input[type=text], input[type=email], input[type=password], textarea {
   border: 1px solid $input-border;
   color: $body-default-color;
@@ -44,13 +40,67 @@ input[type=text], input[type=email], input[type=password], textarea {
   padding: $input-spacing;
 }
 
+.carousel-item > img { 
+  width: 100%;
+}
+
+.card-title{
+  font-size: $base-font-size;
+}
+#searchBar{
+  text-align: center;
+  width: 100%;
+}
+
+.lnk-primary{
+  color: #A2959F;
+}
+
+.lnk-primary:hover{
+  color: #EF6B47;
+}
+
+.btn-primary {
+    background-color: #EF6B47 !important;
+    outline-color: #A2959F !important;
+    border: none !important;
+}
+.btn:active, .btn:focus, .btn.active, .btn.focus{
+  outline: none;
+  box-shadow: none;
+}
+.btn-primary:visited{
+  background-color: #EF6B47 !important;
+}
+
+.btn-primary:focus{
+  background-color: #EF6B47 !important;
+}
+
+.btn-primary:hover {
+  background-color: #A2959F !important;
+}
 
 .primary-color {
-  background-color: #8ac4ff;
+  background-color: #EF6B47;
 }
 
 .secondary-color {
-  background-color: #8de4ff;
+  background-color: #353335;
+}
+
+.dropdown-item.active, .dropdown-item:active, .dropdown-item.visited, .dropdown-item.focus {
+  background-color: #EF6B47 !important;
+  border: none !important;
+  outline-color: #A2959F !important;
+}
+
+#ampColor{
+  color: #EF6B47;
+}
+
+#youColor{
+  color: #A2959F;
 }
 
 nav span {

@@ -80,10 +80,10 @@ export default class Signup extends React.Component {
               name="password2"
               placeholder="Confirm Password"
             />
-            <button className="button">Create Account</button>
+            <button className="button btn btn-primary">Create Account</button>
           </form>
 
-          <Link to="/login">Already have an account?</Link>
+          <Link to="/login" className="lnk-primary">Already have an account?</Link>
         </div>
       </div>
     );

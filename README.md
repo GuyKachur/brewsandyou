@@ -1,10 +1,14 @@
 # Brews & You
 
-Web application
+Web application for people who like beer
 
 ## Objective
 
+* create a platform for users to find, connect, and discuss breweries
+
 ## Preview
+
+![image](./demo/brewsDemo.gif)
 
 ## Tech
 
@@ -17,7 +21,7 @@ This webapp was built focusing on the following technologies:
 
 ```sh
 $ git clone
-$ cd meteor-top10
+$ cd brewsandyou
 $ meteor npm install
 $ meteor
 ```
@@ -26,7 +30,7 @@ $ meteor
 
 - [Website](https://brewsandyou.herokuapp.com/)
 - [Demo Video]
-- [Slides]
+- [Slides](https://docs.google.com/presentation/d/1EP9UOo2u6HPyq8e04K04H-uBRg0l7IoKC8SXiYm1Kvw/edit?usp=sharing)
 - [CS5610 Website](http://johnguerra.co/classes/webDevelopment_spring_2019/)
 
 ## License

@@ -467,6 +467,7 @@ class CompleteSearchBar extends Component {
       placeholder: "Type a brewery name or location",
       value,
       onChange: this.onChange,
+      id: "searchBar",
       className:
         "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4"
     };

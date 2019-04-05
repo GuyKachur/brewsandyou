@@ -17,7 +17,6 @@ import CompleteSearchBar from "./CompleteSearchBar.jsx";
 const HomeComponent = () => {
   return (
     <div className="container text-center">
-      {/*{Meteor.user() ? <LandingPage /> : <p>Please log in</p>}*/}
       <LandingPage />
     </div>
   );
@@ -25,9 +24,8 @@ const HomeComponent = () => {
 
 const SearchComponent = () => {
   return (
-    <div className="container col-md-8 col-lg-6">
-      <div className=" container text-center">
-        {/*{Meteor.user() ? <CompleteSearchBar /> : <p>Please log in</p>}*/}
+    <div className="container col-md-8">
+      <div className="container text-center">
         <CompleteSearchBar />
       </div>
     </div>
@@ -36,26 +34,22 @@ const SearchComponent = () => {
 
 const AboutComponent = () => (
   <div className="container text-center">
-    <p>About page</p>
+    <h1>About Beer & You</h1>
+    <p>We love good beer and since craft brewerys are opening up regularly, it seemed like we needed a platform to discuss our favorite places.  And with that platform we can also help each other find the best places to drink!</p>
+    <p>It is always nice to visit a new city, search the local brew scene, and see what everyone is saying.  Join our community by signing up and start contributing!</p>
   </div>
 );
 
 const NotFoundPage = () => (
-  <div>
+  <div className="container text-center">
     <h2>Page not found</h2>
     <div>please send help</div>
   </div>
 );
 
 const UserAccount = () => {
-  // const user = Meteor.users.findOne(Meteor.userId());
-  // const email = user.emails[0].address;
-  // console.log(
-  //   "Email: ",
-  //   Meteor.users.findOne(Meteor.userId()).emails[0].address
-  // );
   return (
-    <div>
+    <div className="container text-center">
       <h1>Edit User Account Stuff</h1>
       <p>{Meteor.userId()}</p>
     </div>

@@ -25,11 +25,10 @@ class BreweryCard extends Component {
     return (
       <div>
         <Card>
-          <CardImg top width="100%" src="" alt="Card image cap" />
           <CardBody>
             <CardTitle>{this.props.name}</CardTitle>
             <CardSubtitle>{address}</CardSubtitle>
-            <CardLink href={"brewery/" + this.props.id}>More Info</CardLink>
+            <CardLink className="lnk-primary" href={"brewery/" + this.props.id}>More Info</CardLink>
           </CardBody>
         </Card>
       </div>

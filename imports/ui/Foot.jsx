@@ -15,13 +15,13 @@ class Foot extends Component {
               <h5>Breweries</h5>
               <ul>
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/" className="lnk-primary">Home</Link>
                 </li>
                 <li>
-                  <Link to="/search">Search</Link>
+                  <Link to="/search" className="lnk-primary">Search</Link>
                 </li>
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link to="/about" className="lnk-primary">About</Link>
                 </li>
               </ul>
             </div>
