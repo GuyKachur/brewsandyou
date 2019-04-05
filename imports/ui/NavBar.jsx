@@ -1,41 +1,16 @@
 import React from "react";
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
-
-import { NavLink, Redirect } from "react-router-dom";
-
-// import AccountsUIWrapper from "./AccountsUIWrapper.jsx";
+import { Dropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirectToHome: false,
-      redirectToLogin: false
-    };
-  }
-
   onLogout() {
-    // this.setState({redirectToHome: true});
-    // this.setState({redirectToHome: true});
     Accounts.logout();
-    // return this.props.history.push("/");
-  }
-
-  onLogin() {
-    // this.setState({redirectToLogin: true});
-    // return this.props.history.push("/login");
   }
 
   render() {
-    if (this.state.redirectToLogin) {
-      // this.setState({redirectToLogin: false});
-      return <Redirect to="/login" />;
-    }
-    if (this.state.redirectToHome) {
-      // this.setState({redirectToHome: false});
-      return <Redirect to="/" />;
-    }
     return (
       <div className="">
         <nav className="navbar navbar-expand-md navbar-light">
@@ -89,20 +64,56 @@ export default class NavBar extends React.Component {
                   </NavLink>
                 </li>
               </ul>
+
               <div className="md-form my-0">
                 {Meteor.user() ? (
                   <span>
-                    <NavLink to="/account">
-                      {Meteor.users.findOne(Meteor.userId()).emails[0].address}
-                    </NavLink>{" "}
-                    <NavLink to="/" onClick={this.onLogout.bind(this)}>
-                      Logout
-                    </NavLink>
+                    <Dropdown role="menu">
+                      <Dropdown.Toggle
+                        className="p-1 m-0"
+                        id="dropdown-custom-1"
+                        variant="outline-primary"
+                      >
+                        <img
+                          className="bg-light rounded-circle"
+                          height="30px"
+                          width="30px"
+                          src={`https://robohash.org/${
+                            Meteor.users.findOne(Meteor.userId()).emails[0]
+                              .address
+                          }`}
+                          alt={
+                            Meteor.users.findOne(Meteor.userId()).emails[0]
+                              .address
+                          }
+                        />
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu alignRight className="super-colors">
+                        <LinkContainer to="/account">
+                          <Dropdown.Item as="button" role="menuitem">
+                            Account
+                          </Dropdown.Item>
+                        </LinkContainer>
+                        <Dropdown.Item
+                          as="button"
+                          role="menuitem"
+                          onClick={this.onLogout.bind(this)}
+                        >
+                          Logout
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </span>
                 ) : (
-                  <NavLink to="/login">Login</NavLink>
+                  <span>
+                    <NavLink className="btn" to="/login">
+                      Login
+                    </NavLink>{" "}
+                    <NavLink className="btn btn-primary" to="/signup">
+                      Signup
+                    </NavLink>
+                  </span>
                 )}
-                {/*<AccountsUIWrapper />;*/}
               </div>
             </div>
           </div>
