@@ -35,6 +35,73 @@ if (Meteor.isServer) {
 // });
 
 Meteor.methods({
+  "comments.update"(userComment) {
+    if (Meteor.isServer) {
+      // Make sure the user is logged in before inserting a task
+      console.log("Adding usercomment");
+      console.log(userComment);
+      if (!this.userId) {
+        throw new Meteor.Error("not-authorized");
+      } else {
+        //user is logged in, sending an updated list, ^^
+        // console.log("new comments update:");
+        // console.log(.comments);
+        //Update the ranking with the new updated list
+        Breweries.update(
+          { _id: userComment._id },
+          { $push: { comments: userComment.comment } }
+        );
+      }
+    }
+  }
+});
+
+// Meteor.methods({
+//   "rating.update"(userRating) {
+//     if (Meteor.isServer) {
+//       // Make sure the user is logged in before inserting a task
+//       console.log("Adding rating");
+//       console.log(userRating);
+//       if (!this.userId) {
+//         throw new Meteor.Error("not-authorized");
+//       } else {
+//         //user is logged in adding rating
+//         Breweries.update(
+//           { _id: userRating._id },
+//           { $push: { ratings: userRating.rating } }
+//         );
+//       }
+//     }
+//   }
+// });
+
+Meteor.methods({
+  "rating.addSimple"(userRating) {
+    if (Meteor.isServer) {
+      // Make sure the user is logged in before inserting a task
+      console.log("Adding rating");
+      console.log(userRating);
+      if (!this.userId) {
+        throw new Meteor.Error("not-authorized");
+      } else {
+        //user is logged in adding rating
+        Breweries.update(
+          { _id: userRating._id },
+          { $push: { ratings: userRating.rating } }
+        );
+        // Breweries.aggregate([
+        //   {
+        //     rating: {
+        //       avgRating: { $avg: "$ratings" }
+        //     }
+        //   }
+        // ]);
+      }
+    }
+  }
+});
+
+Meteor.methods({
   "address.location"(streetAddress) {
     if (Meteor.isServer) {
       try {

@@ -13,6 +13,8 @@ const getSuggestionValue = suggestion => suggestion.name;
 const renderSuggestion = suggestion => (
   <div className="text-lg p-4">{suggestion.name}</div>
 );
+
+//Hardcoded breweries, should work without now thos
 const sanJoseBreweries = [
   {
     _id: "yer9ihDCYziYEBAS5",
@@ -268,6 +270,8 @@ const sanJoseBreweries = [
     rating: 0
   }
 ];
+
+/** Top level item for functionality stack */
 class CompleteSearchBar extends Component {
   // updateBreweries(response) {
   //   console.log("udate reweroesd " + response);
@@ -450,17 +454,25 @@ class CompleteSearchBar extends Component {
     });
   }
 
-  onListClick(updatedBrewery) {
-    //clicked on list item, we want to update
-    // if (this.state.brewery !== updatedBrewery) {
-    //   console.log("onListClick Brewery " + updatedBrewery);
-    //   this.setState({ brewery: updatedBrewery.brewery });
-    // }
-    alert("Updated Brewery " + updatedBrewery);
+  onListClick(_event, { updatedBrewery }) {
+    // //clicked on list item, we want to update
+    // // if (this.state.brewery !== updatedBrewery) {
+    // //   console.log("onListClick Brewery " + updatedBrewery);
+    // //   this.setState({ brewery: updatedBrewery.brewery });
+    // // }
+    // alert("Updated Brewery " + updatedBrewery);
+    if (this.state.brewery !== updatedBrewery) {
+      this.setState({ brewery: updatedBrewery });
+      let cityLocation = {
+        city: updatedBrewery.city,
+        state: updatedBrewery.state
+      };
+      this.getOtherBreweries(cityLocation);
+    }
   }
 
   render() {
-    console.log("COMPLETESEARCHBARPROPS", this.props);
+    //console.log("COMPLETESEARCHBARPROPS", this.props);
     const { value } = this.state;
 
     const inputProps = {
@@ -471,6 +483,7 @@ class CompleteSearchBar extends Component {
       className:
         "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4"
     };
+
     return (
       <div className="mb-4">
         <h1>Search</h1>

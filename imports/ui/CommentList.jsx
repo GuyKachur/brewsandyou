@@ -41,6 +41,7 @@ class CommentList extends Component {
   }
 
   render() {
+    console.log("COMMENTLISTPROPS", this.props);
     return (
       <div className="commentList text-left">
         <h5 className="text-muted mb-3">

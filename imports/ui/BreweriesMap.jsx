@@ -7,9 +7,14 @@ import {
 } from "react-google-maps";
 import BrewMarker from "./BrewMarker.jsx";
 
+/**
+ *  A brewery map,
+ *
+ */
 const BreweriesMap = withScriptjs(
   withGoogleMap(props => {
-    console.log("BREWEIREISMAPPROPS", props);
+    //  console.log("BREWEIREISMAPPROPS", props);
+    //maps through the incoming breweries, pass on infomation to the brewmarkers, in case we want to pass anything around
     const markers = props.breweries.map(brewery => {
       let marker = (
         <BrewMarker
@@ -35,7 +40,7 @@ const BreweriesMap = withScriptjs(
       );
       return marker;
     });
-
+    //return a google map, with whatever makers we want.
     return (
       <GoogleMap defaultZoom={12} center={props.location}>
         {markers}

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BreweriesMap from "./BreweriesMap.jsx";
-import { Meteor } from "meteor/meteor";
 
+/** conatins the brewery map */
 class BrewMapContainer extends Component {
   constructor(props) {
     super(props);
 
+    //Breweires is a list of all the brewries, brewery is the brewery in focus, location is where to center
     this.state = {
       breweries: props.breweries,
       brewery: props.brewery,
@@ -14,6 +15,7 @@ class BrewMapContainer extends Component {
     };
   }
 
+  //update currently when breweies have been updated
   componentDidUpdate(prevProps) {
     if (!this.compare(this.props.breweries, prevProps.breweries)) {
       this.setState({
@@ -22,6 +24,7 @@ class BrewMapContainer extends Component {
     }
   }
 
+  //compares two arrays
   compare(arr1, arr2) {
     if (!arr1 || !arr2) return false;
     if (arr1.length === 0 && arr2.length === 0) {
@@ -45,14 +48,16 @@ class BrewMapContainer extends Component {
     return result;
   }
 
+  //only the active marker is rendered
   closeOtherMarkers(uid) {
     this.setState({ activeMarker: uid });
   }
 
+  //toggle marker on map
   toggleShowPage() {
     alert("You clicked it");
   }
-
+  //moved serverside, should delete?
   // getLocation(incomingBrewery) {
   //   console.log("INCOMINGBREWERY", incomingBrewery);
   //   if (
@@ -94,10 +99,11 @@ class BrewMapContainer extends Component {
   //   }
   // }
 
-  //// TODO: adding the ability for the map to make calls against the brewery database for locations close to the location....
+  /** renders a BreweriesMap, API key restricted */
   render() {
-    console.log("BREWMAPCONTAINERPROPS", this.props);
-    console.log("BREWERY LAT LNG", this.props.brewery);
+    //console.log("BREWMAPCONTAINERPROPS", this.props);
+    //console.log("BREWERY LAT LNG", this.props.brewery);
+
     return (
       <BreweriesMap
         breweries={this.props.breweries}
@@ -119,6 +125,7 @@ class BrewMapContainer extends Component {
   }
 }
 
+//expects brewires and brewery
 BrewMapContainer.propTypes = {
   breweries: PropTypes.arrayOf(PropTypes.object).isRequired,
   brewery: PropTypes.object.isRequired

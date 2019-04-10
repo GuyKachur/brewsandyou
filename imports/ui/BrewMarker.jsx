@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Marker } from "react-google-maps";
 import PropTypes from "prop-types";
-
-//import BeerIcon from "";
+//import BeerIcon from "./images/beer-outline.ico";
 
 class BrewMarker extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class BrewMarker extends Component {
           title={this.props.name}
           onClick={this.toggleOpen}
           position={this.props.location}
-          icon={""}
+          //  icon={BeerIcon}
         />
       </div>
     );

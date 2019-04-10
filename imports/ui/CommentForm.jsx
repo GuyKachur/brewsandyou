@@ -39,7 +39,7 @@ class CommentForm extends Component {
 
     //servercomment
     let serverComment = {
-      owner: Meteor.user().username,
+      owner: Meteor.user().emails[0].address,
       body: this.body.value,
       createdAt: new Date()
     };
@@ -59,7 +59,7 @@ class CommentForm extends Component {
         this.body.value = "";
       }
     );
-    this.setState({ error: "", loading: false});
+    this.setState({ error: "", loading: false });
   }
 
   /**
@@ -78,7 +78,11 @@ class CommentForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <form method="post" onSubmit={this.onSubmit} className="p-3 mb-3 border-bottom bg-light rounded">
+        <form
+          method="post"
+          onSubmit={this.onSubmit}
+          className="p-3 mb-3 border-bottom bg-light rounded"
+        >
           <div className="form-group">
             <input
               className="form-control"
@@ -92,7 +96,10 @@ class CommentForm extends Component {
           {this.renderError()}
 
           <div className="form-group">
-            <button disabled={this.state.loading} className="btn btn-sm btn-outline-primary">
+            <button
+              disabled={this.state.loading}
+              className="btn btn-sm btn-outline-primary"
+            >
               Comment &#10148;
             </button>
           </div>
