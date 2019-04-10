@@ -40,7 +40,8 @@ class CommentForm extends Component {
     //servercomment
     let serverComment = {
       owner: Meteor.user().username,
-      body: this.body.value
+      body: this.body.value,
+      createdAt: new Date()
     };
     console.log("server comment");
     console.log(serverComment);
@@ -81,7 +82,7 @@ class CommentForm extends Component {
           <div className="form-group">
             <input
               className="form-control"
-              placeholder="🤬 Your Comment"
+              placeholder="Your comment..."
               name="body"
               rows="5"
               ref={input => (this.body = input)}

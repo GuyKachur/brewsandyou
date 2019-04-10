@@ -60,6 +60,14 @@ input[type=text], input[type=email], input[type=password], textarea {
   color: #EF6B47;
 }
 
+.lnk-secondary{
+  color:  #EF6B47;
+}
+
+.lnk-secondary:hover{
+  color: #A2959F;
+}
+
 .btn-primary {
     background-color: #EF6B47 !important;
     outline-color: #A2959F !important;

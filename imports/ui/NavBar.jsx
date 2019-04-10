@@ -4,13 +4,15 @@ import { Meteor } from "meteor/meteor";
 import { Dropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
+import { withTracker } from "meteor/react-meteor-data";
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
   onLogout() {
     Accounts.logout();
   }
 
   render() {
+    // console.log("NavBar Props: ", this.props.user.emails[0].address);
     return (
       <div className="">
         <nav className="navbar navbar-expand-sm navbar-light">
@@ -95,7 +97,13 @@ export default class NavBar extends React.Component {
                   </span>
                 ) : (
                   <span>
-                    <NavLink className="btn" to="/login">
+                    <NavLink
+                      className="btn"
+                      to={{
+                        pathname: "/login",
+                        state: { prevPath: location.pathname }
+                      }}
+                    >
                       Login
                     </NavLink>{" "}
                     <NavLink className="btn btn-primary" to="/signup">
@@ -111,3 +119,9 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+export default withTracker(() => {
+  return {
+    user: Meteor.user()
+  };
+})(NavBar);

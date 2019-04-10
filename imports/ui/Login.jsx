@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 
 export default class Login extends React.Component {
@@ -30,15 +30,19 @@ export default class Login extends React.Component {
         this.setState({ error: "Incorrect login" });
       } else {
         console.log(email, "login successful.");
-        this.setState({ error: "", redirectToHome: true });
+        this.props.location.state
+          ? this.props.history.replace(this.props.location.state.prevPath)
+          : null;
+        // this.setState({ error: "", redirectToHome: true });
       }
     });
   }
 
   render() {
-    if (this.state.redirectToHome) {
-      return <Redirect to="/" />;
-    }
+    console.log("Login props: ", this.props);
+    // if (this.state.redirectToHome) {
+    //   return <Redirect to="/" />;
+    // }
     return (
       <div className="boxed-view">
         <div className="boxed-view__box">
@@ -46,7 +50,10 @@ export default class Login extends React.Component {
 
           {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-          <form onSubmit={this.onSubmit.bind(this)} className="boxed-view__form">
+          <form
+            onSubmit={this.onSubmit.bind(this)}
+            className="boxed-view__form"
+          >
             <input
               onChange={this.onChange.bind(this)}
               value={this.state.emailValue}
@@ -64,7 +71,9 @@ export default class Login extends React.Component {
             <button className="button btn btn-primary">Login</button>
           </form>
 
-          <Link to="/signup" className="lnk-primary">Need an account?</Link>
+          <Link to="/signup" className="lnk-primary">
+            Need an account?
+          </Link>
         </div>
       </div>
     );

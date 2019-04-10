@@ -74,9 +74,14 @@ class LandingPage extends Component {
     this.setState({ activeIndex: newIndex });
   }
 
-  render() {
-    const { activeIndex } = this.state;
+  testFunc(){
+    this.props.history.replace("/search");
+  }
 
+  render() {
+    // console.log("LandingPage props: ", this.props);
+
+    const { activeIndex } = this.state;
     const slides = items.map(item => {
       return (
         <CarouselItem
@@ -120,6 +125,9 @@ class LandingPage extends Component {
         </Carousel>
         <div>
           <p>This is where a blurb should go</p>{" "}
+        </div>
+        <div>
+          <button onClick={this.testFunc.bind(this)}>Search for Beer!</button>
         </div>
       </div>
     );

@@ -7,8 +7,8 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardLink
 } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 class BreweryCard extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class BreweryCard extends Component {
           <CardBody>
             <CardTitle>{this.props.name}</CardTitle>
             <CardSubtitle>{address}</CardSubtitle>
-            <CardLink className="lnk-primary" href={"brewery/" + this.props.id}>More Info</CardLink>
+            <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>More Info</NavLink>
           </CardBody>
         </Card>
       </div>
