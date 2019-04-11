@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Accounts } from "meteor/accounts-base";
+import { Alert } from "reactstrap";
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class Signup extends React.Component {
         <div className="boxed-view__box">
           <h1>Signup</h1>
 
-          {this.state.error ? <p>{this.state.error}</p> : undefined}
+          {this.state.error ? <Alert color="danger">{this.state.error}</Alert> : undefined}
 
           <form
             onSubmit={this.onSubmit.bind(this)}

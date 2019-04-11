@@ -1,14 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-} from "reactstrap";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 
 class BreweryCard extends Component {
   constructor(props) {
@@ -28,7 +21,9 @@ class BreweryCard extends Component {
           <CardBody>
             <CardTitle>{this.props.name}</CardTitle>
             <CardSubtitle>{address}</CardSubtitle>
-            <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>More Info</NavLink>
+            <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>
+              More Info
+            </NavLink>
           </CardBody>
         </Card>
       </div>

@@ -104,7 +104,7 @@ class Brewery extends Component {
             </p>
             <hr className="my-2" />
             <p>Blurb</p>
-            <p>{this.props.brewery[0].rating}</p>
+            <p>Likes: {this.props.brewery[0].rating}</p>
             <p className="lead">
               <button
                 className="button--primary--outline"
@@ -116,7 +116,7 @@ class Brewery extends Component {
             <p>
               {Meteor.user() ? (
                 <Button color="primary button--like" onClick={this.onSubmit}>
-                  {this.state.liked ? "true" : "false"}
+                  {this.state.liked ? "Liked" : "Like"}
                 </Button>
               ) : null}
             </p>

@@ -19,7 +19,7 @@ class CommentList extends Component {
         </h5>
 
         {this.props.comments.length === 0 ? (
-          <div className="alert text-center alert-info m-2">
+          <div className="alert text-center alert--secondary m-2">
             Be the first to comment
           </div>
         ) : null}

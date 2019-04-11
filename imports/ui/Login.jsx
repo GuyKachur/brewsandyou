@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
+import PropTypes from "prop-types";
+import { Alert } from "reactstrap";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -33,22 +35,22 @@ export default class Login extends React.Component {
         this.props.location.state
           ? this.props.history.replace(this.props.location.state.prevPath)
           : null;
-        // this.setState({ error: "", redirectToHome: true });
       }
     });
   }
 
   render() {
     console.log("Login props: ", this.props);
-    // if (this.state.redirectToHome) {
-    //   return <Redirect to="/" />;
-    // }
     return (
       <div className="boxed-view">
         <div className="boxed-view__box">
           <h1>Login</h1>
 
-          {this.state.error ? <p>{this.state.error}</p> : undefined}
+          {this.state.error ? (
+            <Alert color="danger">{this.state.error}</Alert>
+          ) : (
+            undefined
+          )}
 
           <form
             onSubmit={this.onSubmit.bind(this)}
@@ -79,3 +81,8 @@ export default class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object.isRequired
+};
