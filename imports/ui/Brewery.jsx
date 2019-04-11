@@ -18,18 +18,35 @@ class Brewery extends Component {
     //   brewery: {}
     // };
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      liked: false
+    };
   }
 
   onSubmit() {
-    Meteor.call("rating.addSimple", this.state._id, (err, res) => {
-      if (err) {
-        alert("There was error check the console");
-        console.log(err);
-        return;
+    // Meteor.call("rating.addSimple", this.state._id, (err, res) => {
+    //   if (err) {
+    //     alert("There was error check the console");
+    //     console.log(err);
+    //     return;
+    //   }
+    //   console.log("adding simple brewery rating");
+    //   console.log(res);
+    // });
+    Meteor.call(
+      "like.update",
+      { _id: this.state._id, email: Meteor.user().emails[0].address },
+      (err, res) => {
+        if (err) {
+          alert("There was error check the console");
+          console.log(err);
+          return;
+        }
+        console.log("added like update");
+        console.log(res);
       }
-      console.log("adding simple brewery rating");
-      console.log(res);
-    });
+    );
+    this.setState({ liked: !this.state.liked });
   }
 
   componentDidMount() {
@@ -43,12 +60,17 @@ class Brewery extends Component {
           return;
         }
         console.log("brewery profile loaded", res);
+        let liked = false;
+        if (res.usersWhoRated.includes(Meteor.user().emails[0].address)) {
+          liked = true;
+        }
         this.setState({
           _id: res._id,
           brewery: res.brewery,
           comments: res.comments,
           rating: res.rating,
-          id: res.id
+          id: res.id,
+          liked: liked
         });
       }
     );
@@ -136,12 +158,13 @@ class Brewery extends Component {
             </p>
             <hr className="my-2" />
             <p>Blurb</p>
+            <p>{this.state.rating}</p>
             <p className="lead">
               <Button color="primary" href={this.state.brewery.website_url}>
                 Website
               </Button>
               <Button color="primary" onClick={this.onSubmit}>
-                Like{" "}
+                {this.state.liked ? "true" : "false"}
               </Button>
             </p>
           </Jumbotron>
@@ -172,7 +195,7 @@ export default withTracker(props => {
     _id: breweryObject._id,
     brewery: breweryObject.brewery,
     comments: breweryObject.comments,
-    rating: breweryObject.ratung,
+    rating: breweryObject.rating,
     ready: handle.ready()
   };
 })(Brewery);

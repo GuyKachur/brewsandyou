@@ -497,13 +497,13 @@ class CompleteSearchBar extends Component {
           onSuggestionSelected={this.onSuggestionSelected}
         />
         <div className="row">
-          <div className="col-6">
+          <div className="col-4">
             <BreweriesList
               breweries={this.state.breweries}
               onClick={this.onListClick}
             />
           </div>
-          <div className="col-6">
+          <div className="col-8">
             <BrewMapContainer
               brewery={this.state.brewery}
               breweries={this.state.breweries}

@@ -50,24 +50,50 @@ Meteor.methods({
   }
 });
 
-// Meteor.methods({
-//   "rating.update"(userRating) {
-//     if (Meteor.isServer) {
-//       // Make sure the user is logged in before inserting a task
-//       console.log("Adding rating");
-//       console.log(userRating);
-//       if (!this.userId) {
-//         throw new Meteor.Error("not-authorized");
-//       } else {
-//         //user is logged in adding rating
-//         Breweries.update(
-//           { _id: userRating._id },
-//           { $push: { ratings: userRating.rating } }
-//         );
-//       }
-//     }
-//   }
-// });
+Meteor.methods({
+  "like.update"(userLike) {
+    if (Meteor.isServer) {
+      // Make sure the user is logged in before inserting a task
+      // console.log("Adding rating");
+      // console.log(userLike);
+
+      if (!this.userId) {
+        throw new Meteor.Error("not-authorized");
+      } else {
+        //user is logged in adding rating
+        let found = Breweries.find({ _id: userLike._id }).fetch();
+        console.log("found", found);
+        let breweryRatingArray = found[0].usersWhoRated;
+        console.log("breweryRatingArray", breweryRatingArray);
+        if (breweryRatingArray.includes(userLike.email)) {
+          //user has liked, so remove like, and decrement
+          for (var i = 0; i < breweryRatingArray.length; i++) {
+            if (breweryRatingArray[i] === userLike.email) {
+              breweryRatingArray.splice(i, 1);
+            }
+          }
+          console.log("breweryRatingArray", breweryRatingArray);
+          //rating removed, update $ratings
+          Breweries.update(
+            { _id: userLike._id },
+            {
+              $set: {
+                rating: breweryRatingArray.length,
+                usersWhoRated: breweryRatingArray
+              }
+            }
+          );
+        } else {
+          //rating array doesnt include person
+          Breweries.update(
+            { _id: userLike._id },
+            { $push: { usersWhoRated: userLike.email }, $inc: { rating: 1 } }
+          );
+        }
+      }
+    }
+  }
+});
 
 //user rating should be {user:. rating:}
 Meteor.methods({
@@ -203,6 +229,7 @@ function collateBrewery(brewery) {
         brewery: sanitizedBrewery,
         id: brewery.id,
         comments: [],
+        usersWhoRated: [],
         rating: 0
       });
       let returnME = Breweries.find({ id: brewery.id }).fetch();
