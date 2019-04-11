@@ -17,7 +17,7 @@ class NavBar extends React.Component {
       <div className="">
         <nav className="navbar navbar-expand-sm navbar-light">
           <div className="container">
-            <NavLink className="navbar-brand" to="/">
+            <NavLink className="font-weight-bold navbar-brand" to="/">
               Brews <span id="ampColor">&</span> <span id="youColor">You</span>
             </NavLink>
             <button

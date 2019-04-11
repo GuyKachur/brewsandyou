@@ -37,7 +37,8 @@ class Comment extends Component {
 
 Comment.propTypes = {
   owner: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired
 };
 
 export default Comment;

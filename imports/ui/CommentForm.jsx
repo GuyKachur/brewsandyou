@@ -81,7 +81,7 @@ class CommentForm extends Component {
         <form
           method="post"
           onSubmit={this.onSubmit}
-          className="p-3 mb-3 border-bottom bg-light rounded"
+          className="p-3 mb-3 border bg-light rounded"
         >
           <div className="form-group">
             <input
@@ -98,7 +98,7 @@ class CommentForm extends Component {
           <div className="form-group">
             <button
               disabled={this.state.loading}
-              className="btn btn-sm btn-outline-primary"
+              className="button--secondary"
             >
               Comment &#10148;
             </button>

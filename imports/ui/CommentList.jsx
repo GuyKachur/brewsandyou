@@ -45,7 +45,7 @@ class CommentList extends Component {
     return (
       <div className="commentList text-left">
         <h5 className="text-muted mb-3">
-          <span className="badge badge-success ml-2">
+          <span className="badge ml-2">
             {this.state.comments.length}
           </span>{" "}
           Comment{this.state.comments.length > 0 ? "s" : ""}

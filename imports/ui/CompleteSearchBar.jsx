@@ -486,17 +486,18 @@ class CompleteSearchBar extends Component {
 
     return (
       <div className="mb-4">
-        <h1>Search</h1>
-        <Autosuggest
-          suggestions={this.state.suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-          onSuggestionSelected={this.onSuggestionSelected}
-        />
-        <div>
+        <div className="container">
+          <h1>Search</h1>
+          <Autosuggest
+            suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+            onSuggestionSelected={this.onSuggestionSelected}
+          />
+
           <BreweriesList
             breweries={this.state.breweries}
             onClick={this.onListClick}

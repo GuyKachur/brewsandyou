@@ -127,7 +127,7 @@ class LandingPage extends Component {
           <p>This is where a blurb should go</p>{" "}
         </div>
         <div>
-          <button onClick={this.testFunc.bind(this)}>Search for Beer!</button>
+          <button className="button--primary" onClick={this.testFunc.bind(this)}>Search for Beer!</button>
         </div>
       </div>
     );

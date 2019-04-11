@@ -1,4 +1,5 @@
 @import './variables';
+@import "./components/button";
 
 * {
   box-sizing: border-box;
@@ -86,7 +87,18 @@ input[type=text], input[type=email], input[type=password], textarea {
 }
 
 .btn-primary:hover {
-  background-color: #A2959F !important;
+  background-color: #d1a336 !important;
+}
+
+.btn-outline-primary{
+  border-color: #fff !important;
+  color: #fff !important;
+  background-color: #d1a336 !important;
+}
+
+.btn-outline-primary:hover {
+  color: white !important;
+  background: #d1a336 !important;
 }
 
 .primary-color {
@@ -126,7 +138,16 @@ footer {
   margin-top: 3em;
 }
 
+.badge{
+  background-color: #EF6B47;
+  color: white;
+}
 
+.jumbotron{
+  background-image: url("beer_flights.jpg");
+  background-blend-mode: overlay;
+  background-size: cover;
+}
 /* temp */
 .button {
   background-color: $button-bg;
@@ -169,4 +190,27 @@ footer {
 .boxed-view__form {
   display: flex;
   flex-direction: column;
+}
+
+.react-autosuggest__suggestions-list{
+  list-style: none;
+  // position: absolute;
+  // z-index: 2;
+}
+
+.react-autosuggest__suggestion{
+  border: 1px solid #e1e1dd;
+  background-color: white;
+  cursor: pointer;
+
+
+  &:hover, &:focus {
+    border: 1px solid #EF6B47;
+    color: #EF6B47;
+  }
+
+  &:active {
+    border: 1px solid #EF6B47;
+    transform: scale(1.1);
+  }
 }

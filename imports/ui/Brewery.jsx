@@ -108,6 +108,7 @@ class Brewery extends Component {
           </NavLink>{" "}
           to comment.
         </Alert>
+        <CommentList comments={this.state.comments} />
       </div>
     );
   }
@@ -118,9 +119,7 @@ class Brewery extends Component {
     console.log("state: ", this.state);
 
     return this.state ? (
-      <div className="breweryContainer container">
-        <h1>{this.props.match.params.id}</h1>
-
+      <div className="breweryContainer container text-center">
         <div>
           <Jumbotron>
             <h1 className="display-3">{this.state.brewery.name}</h1>
@@ -134,9 +133,9 @@ class Brewery extends Component {
             <hr className="my-2" />
             <p>Blurb</p>
             <p className="lead">
-              <Button color="primary" href={this.state.brewery.website_url}>
+              <button className="button--primary--outline" href={this.state.brewery.website_url}>
                 Website
-              </Button>
+              </button>
             </p>
           </Jumbotron>
         </div>
