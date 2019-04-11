@@ -2,21 +2,11 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
-import Comment from "./Comment.jsx";
 import PropTypes from "prop-types";
 import moment from "moment";
 import CommentForm from "./CommentForm.jsx";
 import CommentList from "./CommentList.jsx";
-import {
-  Alert,
-  Card,
-  CardImg,
-  Jumbotron,
-  Button,
-  CardBody,
-  CardTitle,
-  CardSubtitle
-} from "reactstrap";
+import { Alert, Jumbotron, Button } from "reactstrap";
 import { Breweries } from "../api/breweries.js";
 
 class Brewery extends Component {
@@ -25,11 +15,21 @@ class Brewery extends Component {
 
     //getting the brewery data object, ocntaining an id, brewery, comments, rating
     // this.state = {
-    //   _id: props._id,
-    //   brewery: props.brewery,
-    //   comments: props.comments,
-    //   rating: props.rating
+    //   brewery: {}
     // };
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit() {
+    Meteor.call("rating.addSimple", this.state._id, (err, res) => {
+      if (err) {
+        alert("There was error check the console");
+        console.log(err);
+        return;
+      }
+      console.log("adding simple brewery rating");
+      console.log(res);
+    });
   }
 
   componentDidMount() {
@@ -55,17 +55,19 @@ class Brewery extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log("componentDidUpdate Brewery: prev then props", prevProps);
-    // if (!this.compare(this.props.comments, prevProps.comments)) {
-    //   this.setState({
-    //     comments: this.props.comments
-    //   });
-    // }
-    // if (!this.compare(this.props.rating, prevProps.rating)) {
-    //   this.setState({
-    //     rating: this.props.rating
-    //   });
-    // }
+    console.log("componentDidUpdate Brewery: prev then props", prevProps);
+    if (this.props && this.props.comments) {
+      if (prevProps.comments === undefined) {
+        this.setState({ comments: this.props.comments });
+        return;
+      }
+      if (this.props.comments.length !== prevProps.comments.length) {
+        this.setState({ comments: this.props.comments });
+      }
+      if (this.props.rating !== prevProps.rating) {
+        this.setState({ rating: this.props.rating });
+      }
+    }
   }
 
   compare(arr1, arr2) {
@@ -81,6 +83,7 @@ class Brewery extends Component {
           result = this.compare(e1, e2);
         } else if (e1 !== e2) {
           result = false;
+          return false;
         } else {
           result = true;
         }
@@ -117,7 +120,7 @@ class Brewery extends Component {
     console.log("props: ", this.props);
     console.log("state: ", this.state);
 
-    return this.state ? (
+    return this.state && this.state.brewery ? (
       <div className="breweryContainer container">
         <h1>{this.props.match.params.id}</h1>
 
@@ -137,6 +140,9 @@ class Brewery extends Component {
               <Button color="primary" href={this.state.brewery.website_url}>
                 Website
               </Button>
+              <Button color="primary" onClick={this.onSubmit}>
+                Like{" "}
+              </Button>
             </p>
           </Jumbotron>
         </div>
@@ -155,11 +161,18 @@ Brewery.propTypes = {
   match: PropTypes.object
 };
 
-export default withTracker(() => {
-  const handle = Meteor.subscribe("Breweries");
+export default withTracker(props => {
+  console.log("BREWERY PROPS", props);
+  const handle = Meteor.subscribe("Breweries", parseInt(props.match.params.id));
+  let b = Breweries.find({}).fetch();
+  let breweryObject = b.length == 1 ? b[0] : {};
+  console.log("BREWERYOBJECT", breweryObject);
   return {
     user: Meteor.user(),
-    brewery: Breweries.find({}).fetch(),
+    _id: breweryObject._id,
+    brewery: breweryObject.brewery,
+    comments: breweryObject.comments,
+    rating: breweryObject.ratung,
     ready: handle.ready()
   };
 })(Brewery);

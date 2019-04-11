@@ -6,16 +6,10 @@ export const Breweries = new Mongo.Collection("Breweries");
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 if (Meteor.isServer) {
-  Meteor.publish("Breweries", function breweriesToPublish() {
-    return Breweries.find(
-      {},
-      {
-        limit: 20,
-        sort: {
-          createdAt: -1
-        }
-      }
-    );
+  Meteor.publish("Breweries", function breweriesToPublish(brewID) {
+    let data = Breweries.find({ id: brewID });
+    //console.log("returning data", data);
+    return data;
   });
 }
 
@@ -75,6 +69,7 @@ Meteor.methods({
 //   }
 // });
 
+//user rating should be {user:. rating:}
 Meteor.methods({
   "rating.addSimple"(userRating) {
     if (Meteor.isServer) {
@@ -85,10 +80,7 @@ Meteor.methods({
         throw new Meteor.Error("not-authorized");
       } else {
         //user is logged in adding rating
-        Breweries.update(
-          { _id: userRating._id },
-          { $push: { ratings: userRating.rating } }
-        );
+        Breweries.update({ _id: userRating }, { $inc: { rating: 1 } });
         // Breweries.aggregate([
         //   {
         //     rating: {
