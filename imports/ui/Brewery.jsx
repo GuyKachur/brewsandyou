@@ -142,9 +142,8 @@ class Brewery extends Component {
   }
 
   render() {
-    console.log("moment: ", moment());
-    console.log("props: ", this.props);
-    console.log("state: ", this.state);
+    console.log("Brewery props: ", this.props);
+    console.log("Brewery state: ", this.state);
 
     return this.state && this.state.brewery ? (
       <div className="breweryContainer container text-center">

@@ -58,7 +58,7 @@ class CommentList extends Component {
         ) : null}
 
         {this.state.comments.map((comment, index) => (
-          <Comment key={index} body={comment.body} owner={comment.owner} />
+          <Comment key={index} body={comment.body} owner={comment.owner} createdAt={comment.createdAt} />
         ))}
       </div>
     );

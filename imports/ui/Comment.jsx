@@ -12,7 +12,10 @@ class Comment extends Component {
       createdAt: this.props.createdAt
     };
   }
+
   render() {
+    console.log("Comment props: ", this.props);
+    console.log("Comment state: ", this.state);
     return (
       <div className="media mb-2 ml-2 text-left">
         <img
@@ -23,12 +26,12 @@ class Comment extends Component {
           alt={this.state.owner}
         />
 
-        <div className="media-body p-2 shadow-sm rounded bg-white border">
-          <div>
+        <div className="media-body shadow-sm rounded bg-white border">
+          <div className="d-flex justify-content-between bg-light p-2">
             <h6 className="mt-0 mb-1 text-muted">{this.state.owner}</h6>
-            <span>{moment(this.state.createdAt).fromNow()}</span>
+            <span className="text-muted">{moment(this.state.createdAt).fromNow()}</span>
           </div>
-          <div>{this.state.body}</div>
+          <div className="m-2">{this.state.body}</div>
         </div>
       </div>
     );
