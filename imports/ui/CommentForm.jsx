@@ -81,7 +81,7 @@ class CommentForm extends Component {
         <form
           method="post"
           onSubmit={this.onSubmit}
-          className="p-3 mb-3 border bg-light rounded"
+          className="p-3 mb-3 border bg-white rounded"
         >
           <div className="form-group">
             <input

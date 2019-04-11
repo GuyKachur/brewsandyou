@@ -206,11 +206,11 @@ footer {
 
   &:hover, &:focus {
     border: 1px solid #EF6B47;
-    color: #EF6B47;
   }
 
   &:active {
     border: 1px solid #EF6B47;
     transform: scale(1.1);
+    color: #EF6B47;
   }
 }

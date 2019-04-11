@@ -23,7 +23,7 @@ class Comment extends Component {
           alt={this.state.owner}
         />
 
-        <div className="media-body p-2 shadow-sm rounded bg-light border">
+        <div className="media-body p-2 shadow-sm rounded bg-white border">
           <div>
             <h6 className="mt-0 mb-1 text-muted">{this.state.owner}</h6>
             <span>{moment(this.state.createdAt).fromNow()}</span>
