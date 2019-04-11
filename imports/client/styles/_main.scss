@@ -194,14 +194,17 @@ footer {
 
 .react-autosuggest__suggestions-list{
   list-style: none;
-  // position: absolute;
-  // z-index: 2;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  top: 52px;
 }
 
 .react-autosuggest__suggestion{
   border: 1px solid #e1e1dd;
   background-color: white;
   cursor: pointer;
+
 
 
   &:hover, &:focus {

@@ -10,6 +10,8 @@
 
 	&:hover, &:focus {
 		background-color: #d1a336;
+		color: white;
+		text-decoration: none;
 	}
 
 	&:active {
@@ -55,6 +57,21 @@
 
 	&:active {
 		background-color: #ab8429;
+		transform: scale(1.1);
+	}
+}
+
+.button--link {
+	color: white;
+	text-decoration: none;
+
+	&:hover, &:focus {
+		color: white;
+		text-decoration: none;
+	}
+
+	&:active {
+		// background-color: #EF6B47;
 		transform: scale(1.1);
 	}
 }

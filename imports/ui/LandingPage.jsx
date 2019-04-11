@@ -10,12 +10,12 @@ import {
 //https://en.wikipedia.org/wiki/File:Stone_Brewing_Co._Year_Round_Beers.jpg
 
 const items = [
-  {
-    src:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/Stone_Brewing_Co._Year_Round_Beers.jpg/800px-Stone_Brewing_Co._Year_Round_Beers.jpg",
-    altText: "Stone Brewing",
-    caption: "A beer on a bar"
-  },
+  // {
+  //   src:
+  //     "https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/Stone_Brewing_Co._Year_Round_Beers.jpg/800px-Stone_Brewing_Co._Year_Round_Beers.jpg",
+  //   altText: "Stone Brewing",
+  //   caption: "A beer on a bar"
+  // },
   {
     //https://commons.wikimedia.org/wiki/File:Green_Beacon_Brewing_Company_08.jpg
     src:
@@ -74,8 +74,8 @@ class LandingPage extends Component {
     this.setState({ activeIndex: newIndex });
   }
 
-  testFunc(){
-    this.props.history.replace("/search");
+  redirectSearch() {
+    return this.props.history.push("/search");
   }
 
   render() {
@@ -123,11 +123,16 @@ class LandingPage extends Component {
             onClickHandler={this.next}
           />
         </Carousel>
-        <div>
-          <p>This is where a blurb should go</p>{" "}
+        <div className="p-2">
+          <p>This is a place to find and discuss your favorite breweries</p>{" "}
         </div>
-        <div>
-          <button className="button--primary" onClick={this.testFunc.bind(this)}>Search for Beer!</button>
+        <div className="col">
+          <button
+            onClick={this.redirectSearch.bind(this)}
+            className="button--primary"
+          >
+            Start search!
+          </button>
         </div>
       </div>
     );

@@ -4,8 +4,6 @@ import Autosuggest from "react-autosuggest";
 import { Meteor } from "meteor/meteor";
 import BrewMapContainer from "./BrewMapContainer.jsx";
 import BreweriesList from "./BreweriesList.jsx";
-import { Breweries } from "../api/breweries.js";
-import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 
 const getSuggestionValue = suggestion => suggestion.name;
@@ -389,6 +387,7 @@ class CompleteSearchBar extends Component {
   }
 
   getSuggestions(value) {
+    console.log("GETSUGGESTIONS", value);
     Meteor.call("breweries.autocomplete", value, (err, res) => {
       if (err) {
         alert("There was error check the console");
@@ -486,8 +485,8 @@ class CompleteSearchBar extends Component {
 
     return (
       <div className="mb-4">
-        <div className="container">
-          <h1>Search</h1>
+        <h1>Search</h1>
+        <div className="position-relative">
           <Autosuggest
             suggestions={this.state.suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -497,15 +496,20 @@ class CompleteSearchBar extends Component {
             inputProps={inputProps}
             onSuggestionSelected={this.onSuggestionSelected}
           />
-
-          <BreweriesList
-            breweries={this.state.breweries}
-            onClick={this.onListClick}
-          />
-          <BrewMapContainer
-            brewery={this.state.brewery}
-            breweries={this.state.breweries}
-          />
+        </div>
+        <div className="row">
+          <div className="col-xl-4 col-md-6">
+            <BreweriesList
+              breweries={this.state.breweries}
+              onClick={this.onListClick}
+            />
+          </div>
+          <div className="col-xl-8 col-md-6">
+            <BrewMapContainer
+              brewery={this.state.brewery}
+              breweries={this.state.breweries}
+            />
+          </div>
         </div>
       </div>
     );
@@ -517,11 +521,12 @@ CompleteSearchBar.propTypes = {
   brewery: PropTypes.object
 };
 
-export default withTracker(() => {
-  const handle = Meteor.subscribe("Breweries");
-  return {
-    breweries: Breweries.find({}).fetch(),
-    user: Meteor.user(),
-    ready: handle.ready()
-  };
-})(CompleteSearchBar);
+// export default withTracker(() => {
+//   const handle = Meteor.subscribe("Breweries");
+//   return {
+//     breweries: Breweries.find({}).fetch(),
+//     user: Meteor.user(),
+//     ready: handle.ready()
+//   };
+// })(CompleteSearchBar);
+export default CompleteSearchBar;
