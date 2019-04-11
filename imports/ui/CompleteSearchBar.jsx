@@ -389,6 +389,7 @@ class CompleteSearchBar extends Component {
   }
 
   getSuggestions(value) {
+    console.log("GETSUGGESTIONS", value);
     Meteor.call("breweries.autocomplete", value, (err, res) => {
       if (err) {
         alert("There was error check the console");
@@ -520,11 +521,12 @@ CompleteSearchBar.propTypes = {
   brewery: PropTypes.object
 };
 
-export default withTracker(() => {
-  const handle = Meteor.subscribe("Breweries");
-  return {
-    breweries: Breweries.find({}).fetch(),
-    user: Meteor.user(),
-    ready: handle.ready()
-  };
-})(CompleteSearchBar);
+// export default withTracker(() => {
+//   const handle = Meteor.subscribe("Breweries");
+//   return {
+//     breweries: Breweries.find({}).fetch(),
+//     user: Meteor.user(),
+//     ready: handle.ready()
+//   };
+// })(CompleteSearchBar);
+export default CompleteSearchBar;

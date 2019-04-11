@@ -263,6 +263,7 @@ function collateBrewery(brewery) {
 //returns a list of brewery names and id's
 Meteor.methods({
   "breweries.autocomplete"(suggestionQuery) {
+    console.log("AUTOCOMPLETE", suggestionQuery);
     if (Meteor.isServer) {
       try {
         const params = { query: suggestionQuery };
