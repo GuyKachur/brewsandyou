@@ -186,7 +186,7 @@ class Brewery extends Component {
   }
 }
 Brewery.propTypes = {
-  _id: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired,
   brewery: PropTypes.object.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   rating: PropTypes.number.isRequired,

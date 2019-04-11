@@ -35,6 +35,7 @@ const sanJoseBreweries = [
     },
     id: 456,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -58,6 +59,7 @@ const sanJoseBreweries = [
     },
     id: 623,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -81,6 +83,7 @@ const sanJoseBreweries = [
     },
     id: 667,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -104,6 +107,7 @@ const sanJoseBreweries = [
     },
     id: 377,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -127,6 +131,7 @@ const sanJoseBreweries = [
     },
     id: 441,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -150,6 +155,7 @@ const sanJoseBreweries = [
     },
     id: 636,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -173,6 +179,7 @@ const sanJoseBreweries = [
     },
     id: 655,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -196,6 +203,7 @@ const sanJoseBreweries = [
     },
     id: 985,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -219,6 +227,7 @@ const sanJoseBreweries = [
     },
     id: 1033,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -242,6 +251,7 @@ const sanJoseBreweries = [
     },
     id: 1157,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   },
   {
@@ -265,6 +275,7 @@ const sanJoseBreweries = [
     },
     id: 1171,
     comments: [],
+    usersWhoRated: [],
     rating: 0
   }
 ];
