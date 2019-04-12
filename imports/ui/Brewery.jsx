@@ -103,23 +103,22 @@ class Brewery extends Component {
                 this.props.brewery[0].brewery.state}
             </p>
             <hr className="my-2" />
-            <p>Blurb</p>
             <p>Likes: {this.props.brewery[0].rating}</p>
             <p className="lead">
-              <button
-                className="button--primary--outline"
+              <a
+                className="brewLink--primary"
                 href={this.props.brewery[0].brewery.website_url}
               >
                 Website
-              </button>
+              </a>
             </p>
-            <p>
+            {/*<p>
               {Meteor.user() ? (
                 <Button color="primary button--like" onClick={this.onSubmit}>
                   {this.state.liked ? "Liked" : "Like"}
                 </Button>
               ) : null}
-            </p>
+            </p>*/}
           </Jumbotron>
         </div>
         <div className="commentList text-left">{this.renderForm()}</div>

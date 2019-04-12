@@ -68,7 +68,18 @@ input[type=text], input[type=email], input[type=password], textarea {
 .lnk-secondary:hover{
   color: #A2959F;
 }
+.brewLink--primary {
+  color: #EF6B47;
+  cursor: pointer;
 
+  &:hover, &:focus {
+    color: #EF6B47;
+  }
+
+  &:active {
+    color: #d1a336;
+  }
+}
 .btn-primary {
     background-color: #EF6B47 !important;
     outline-color: #A2959F !important;
