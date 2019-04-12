@@ -1,77 +1,81 @@
 .button--primary {
-	background-color: #EF6B47;
-	border-radius: .25rem;
-	cursor: pointer;
-	line-height: 1;
-	padding: 1rem;
-	color: white;
-	outline: none;
-	transition: background .2s ease, transform .2s ease;
+  background-color: #ef6b47;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 1rem;
+  color: white;
+  outline: none;
+  transition: background 0.2s ease, transform 0.2s ease;
 
-	&:hover, &:focus {
-		background-color: #d1a336;
-		color: white;
-		text-decoration: none;
-	}
+  &:hover,
+  &:focus {
+    background-color: #a2959f;
+    color: white;
+    text-decoration: none;
+  }
 
-	&:active {
-		background-color: #d1a336;
-		transform: scale(1.1);
-	}
+  &:active {
+    background-color: #a2959f;
+    transform: scale(1.1);
+  }
 }
 
 .button--primary--outline {
-	background-color: transparent;
-	border: 1px solid transparent;
-	border-radius: .25rem;
-	color: #EF6B47;
-	cursor: pointer;
-	line-height: 1;
-	padding: 1rem;
-	transition: background .2s ease, transform .2s ease;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #ef6b47;
+  cursor: pointer;
+  line-height: 1;
+  padding: 1rem;
+  transition: background 0.2s ease, transform 0.2s ease;
 
-	&:hover, &:focus {
-		color: #EF6B47;
-		border-color: #EF6B47;
-	}
+  &:hover,
+  &:focus {
+    color: #ef6b47;
+    border-color: #ef6b47;
+  }
 
-	&:active {
-		// background-color: #EF6B47;
-		transform: scale(1.1);
-	}
+  &:active {
+    // background-color: #EF6B47;
+    transform: scale(1.1);
+  }
 }
 
 .button--secondary {
-	background-color: #d1a336;
-	border-radius: .25rem;
-	cursor: pointer;
-	line-height: 1;
-	padding: 1rem;
-	color: white;
-	outline: none;
-	transition: background .2s ease, transform .2s ease;
+  background-color: #a2959f;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 1rem;
+  color: white;
+  outline: none;
+  transition: background 0.2s ease, transform 0.2s ease;
 
-	&:hover, &:focus {
-		background-color: #ab8429;
-	}
+  &:hover,
+  &:focus {
+    background-color: #ab8429;
+  }
 
-	&:active {
-		background-color: #ab8429;
-		transform: scale(1.1);
-	}
+  &:active {
+    background-color: #ab8429;
+    transform: scale(1.1);
+  }
 }
 
 .button--link {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 
-	&:hover, &:focus {
-		color: white;
-		text-decoration: none;
-	}
+  &:hover,
+  &:focus {
+    color: white;
+    text-decoration: none;
+  }
 
-	&:active {
-		// background-color: #EF6B47;
-		transform: scale(1.1);
-	}
+  &:active {
+    // background-color: #EF6B47;
+    transform: scale(1.1);
+  }
 }

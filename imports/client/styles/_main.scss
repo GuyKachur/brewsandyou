@@ -90,7 +90,7 @@ textarea {
   }
 
   &:active {
-    color: #d1a336;
+    color: #a2959f;
   }
 }
 .btn-primary {
@@ -114,7 +114,7 @@ textarea {
 }
 
 .btn-primary:hover {
-  background-color: #333333 !important;
+  background-color: #a2959f !important;
 }
 
 .btn-outline-primary {
@@ -252,6 +252,6 @@ footer {
 }
 
 .alert--secondary {
-  background-color: #fff7e5;
+  background-color: rgba(255, 163, 133, 0.1);
   border: 1px solid rgba(83, 90, 96, 0.1);
 }
