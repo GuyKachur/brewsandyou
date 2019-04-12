@@ -112,13 +112,13 @@ class Brewery extends Component {
                 Website
               </a>
             </p>
-            {/*<p>
+            <p>
               {Meteor.user() ? (
                 <Button color="primary button--like" onClick={this.onSubmit}>
                   {this.state.liked ? "Liked" : "Like"}
                 </Button>
               ) : null}
-            </p>*/}
+            </p>
           </Jumbotron>
         </div>
         <div className="commentList text-left">{this.renderForm()}</div>
