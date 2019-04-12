@@ -17,18 +17,27 @@ const items = [
   //   caption: "A beer on a bar"
   // },
   {
-    //https://commons.wikimedia.org/wiki/File:Green_Beacon_Brewing_Company_08.jpg
-    src:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Green_Beacon_Brewing_Company_08.jpg/799px-Green_Beacon_Brewing_Company_08.jpg",
-    altText: "A flight of beers",
-    caption: "A flight of beers"
-  },
-  {
     //https://www.pexels.com/photo/three-10-barrel-brewing-glasses-full-of-beer-1267681/
     src:
       "https://images.pexels.com/photos/1267681/pexels-photo-1267681.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    altText: "A flight of beers",
-    caption: "A flight of beers"
+    altText:
+      "the beutiful sunlight filtering through three beers, one a bright yellow, one a warm rich orange, and the last a vibrant alive red.",
+    caption: "One Beer, Two Beer, Three Beer, Pour!"
+  },
+  {
+    //https://commons.wikimedia.org/wiki/File:Green_Beacon_Brewing_Company_08.jpg
+    src:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Green_Beacon_Brewing_Company_08.jpg/799px-Green_Beacon_Brewing_Company_08.jpg",
+    altText:
+      "A series of large brewering barrels alighed, clean and ready to be filled with that sweet sweet necter",
+    caption: "Metal boys in a line"
+  },
+  {
+    //https://www.vineyardsquarehotel.com/wp-content/uploads/2018/09/marthas-vineyard-craft-beer-festival-1024x576.jpg
+    src:
+      "https://www.vineyardsquarehotel.com/wp-content/uploads/2018/09/marthas-vineyard-craft-beer-festival-1024x576.jpg",
+    altText: "A flight of beers, each more beer then the last",
+    caption: "Which one is the true Beer?"
   }
 ];
 
