@@ -20,7 +20,10 @@ class Brewery extends Component {
   onSubmit() {
     Meteor.call(
       "like.update",
-      { _id: this.props.brewery[0]._id, email: Meteor.user().emails[0].address },
+      {
+        _id: this.props.brewery[0]._id,
+        email: Meteor.user().emails[0].address
+      },
       (err, res) => {
         if (err) {
           alert("There was error check the console");
@@ -145,6 +148,6 @@ export default withTracker(props => {
   return {
     user: Meteor.user(),
     loading,
-    brewery: brewery,
+    brewery: brewery
   };
 })(Brewery);

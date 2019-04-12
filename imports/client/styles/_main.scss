@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 @import "./components/button";
 
 * {
@@ -32,7 +32,19 @@ p {
   margin-bottom: $space;
 }
 
-input[type=text], input[type=email], input[type=password], textarea {
+input[type="text"],
+textarea {
+  border: 1px solid $input-border;
+  color: #ef6b47;
+  font-size: $base-font-size;
+  font-family: $body-default-font-family;
+  margin-bottom: $space;
+  padding: $input-spacing;
+}
+
+input[type="email"],
+input[type="password"],
+textarea {
   border: 1px solid $input-border;
   color: $body-default-color;
   font-size: $base-font-size;
@@ -41,39 +53,40 @@ input[type=text], input[type=email], input[type=password], textarea {
   padding: $input-spacing;
 }
 
-.carousel-item > img { 
+.carousel-item > img {
   width: 100%;
 }
 
-.card-title{
+.card-title {
   font-size: $base-font-size;
 }
-#searchBar{
+#searchBar {
   text-align: center;
   width: 100%;
 }
 
-.lnk-primary{
-  color: #A2959F;
+.lnk-primary {
+  color: #a2959f;
 }
 
-.lnk-primary:hover{
-  color: #EF6B47;
+.lnk-primary:hover {
+  color: #ef6b47;
 }
 
-.lnk-secondary{
-  color:  #EF6B47;
+.lnk-secondary {
+  color: #ef6b47;
 }
 
-.lnk-secondary:hover{
-  color: #A2959F;
+.lnk-secondary:hover {
+  color: #a2959f;
 }
 .brewLink--primary {
-  color: #EF6B47;
+  color: #ef6b47;
   cursor: pointer;
 
-  &:hover, &:focus {
-    color: #EF6B47;
+  &:hover,
+  &:focus {
+    color: #ef6b47;
   }
 
   &:active {
@@ -81,57 +94,63 @@ input[type=text], input[type=email], input[type=password], textarea {
   }
 }
 .btn-primary {
-    background-color: #EF6B47 !important;
-    outline-color: #A2959F !important;
-    border: none !important;
+  background-color: #ef6b47 !important;
+  outline-color: #a2959f !important;
+  border: none !important;
 }
-.btn:active, .btn:focus, .btn.active, .btn.focus{
+.btn:active,
+.btn:focus,
+.btn.active,
+.btn.focus {
   outline: none;
   box-shadow: none;
 }
-.btn-primary:visited{
-  background-color: #EF6B47 !important;
+.btn-primary:visited {
+  background-color: #ef6b47 !important;
 }
 
-.btn-primary:focus{
-  background-color: #EF6B47 !important;
+.btn-primary:focus {
+  background-color: #ef6b47 !important;
 }
 
 .btn-primary:hover {
-  background-color: #d1a336 !important;
+  background-color: #333333 !important;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
   border-color: #fff !important;
   color: #fff !important;
-  background-color: #d1a336 !important;
+  background-color: #333333 !important;
 }
 
 .btn-outline-primary:hover {
   color: white !important;
-  background: #d1a336 !important;
+  background: #333333 !important;
 }
 
 .primary-color {
-  background-color: #EF6B47;
+  background-color: #ef6b47;
 }
 
 .secondary-color {
-  background-color: #353335;
+  background-color: #a2959f;
 }
 
-.dropdown-item.active, .dropdown-item:active, .dropdown-item.visited, .dropdown-item.focus {
-  background-color: #EF6B47 !important;
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item.visited,
+.dropdown-item.focus {
+  background-color: #ef6b47 !important;
   border: none !important;
-  outline-color: #A2959F !important;
+  outline-color: #a2959f !important;
 }
 
-#ampColor{
-  color: #EF6B47;
+#ampColor {
+  color: #ef6b47;
 }
 
-#youColor{
-  color: #A2959F;
+#youColor {
+  color: #a2959f;
 }
 
 nav span {
@@ -149,12 +168,12 @@ footer {
   margin-top: 3em;
 }
 
-.badge{
-  background-color: #EF6B47;
+.badge {
+  background-color: #ef6b47;
   color: white;
 }
 
-.jumbotron{
+.jumbotron {
   background-image: url("beer_flights.jpg");
   background-blend-mode: overlay;
   background-size: cover;
@@ -182,7 +201,7 @@ footer {
 }
 
 .boxed-view--modal {
-  background: fade-out($boxed-view-overlay-bg, .3);
+  background: fade-out($boxed-view-overlay-bg, 0.3);
   position: fixed;
   top: 0;
   left: 0;
@@ -203,7 +222,7 @@ footer {
   flex-direction: column;
 }
 
-.react-autosuggest__suggestions-list{
+.react-autosuggest__suggestions-list {
   list-style: none;
   position: absolute;
   z-index: 2;
@@ -211,25 +230,24 @@ footer {
   top: 52px;
 }
 
-.react-autosuggest__suggestion{
+.react-autosuggest__suggestion {
   border: 1px solid #e1e1dd;
   background-color: white;
   cursor: pointer;
 
-
-
-  &:hover, &:focus {
-    border: 1px solid #EF6B47;
+  &:hover,
+  &:focus {
+    border: 1px solid #ef6b47;
   }
 
   &:active {
-    border: 1px solid #EF6B47;
+    border: 1px solid #ef6b47;
     transform: scale(1.1);
-    color: #EF6B47;
+    color: #ef6b47;
   }
 }
 
-.alert--secondary{
+.alert--secondary {
   background-color: #fff7e5;
-  border: 1px solid rgba(83,90,96,0.1);
+  border: 1px solid rgba(83, 90, 96, 0.1);
 }

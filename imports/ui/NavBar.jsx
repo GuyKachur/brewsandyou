@@ -18,6 +18,13 @@ class NavBar extends React.Component {
         <nav className="navbar navbar-expand-sm navbar-light">
           <div className="container">
             <NavLink className="font-weight-bold navbar-brand" to="/">
+              <img
+                src="favicon-96x96.png"
+                width="40"
+                height="40"
+                alt="our-logo"
+                style={{ marginRight: 0.3 + "em" }}
+              />
               Brews <span id="ampColor">&</span> <span id="youColor">You</span>
             </NavLink>
             <button
