@@ -34,7 +34,7 @@ class BrewMarker extends Component {
           title={this.props.name}
           onClick={this.toggleOpen}
           position={this.props.location}
-          icon={"beer-outline.png"}
+          icon={"marker-75.png"}
         />
       </div>
     );
