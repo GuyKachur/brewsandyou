@@ -29,7 +29,7 @@ const items = [
     src:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Green_Beacon_Brewing_Company_08.jpg/799px-Green_Beacon_Brewing_Company_08.jpg",
     altText:
-      "A series of large brewering barrels alighed, clean and ready to be filled with that sweet sweet necter",
+      "A series of large brewering barrels aligned, clean and ready to be filled with that sweet sweet necter",
     caption: "Metal boys in a line"
   },
   {

@@ -509,7 +509,7 @@ class CompleteSearchBar extends Component {
           />
         </div>
         <div className="row">
-          <div className="col-xl-4 col-md-6">
+          <div className="col-xl-4 col-md-6 boxsize">
             <BreweriesList
               breweries={this.state.breweries}
               onClick={this.onListClick}
