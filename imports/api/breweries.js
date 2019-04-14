@@ -28,6 +28,14 @@ if (Meteor.isServer) {
 //   }
 // });
 
+// Code revire from Yibo Zhao
+// I would suggest merging those Meteor.methods into one.
+// Meteor.methods({
+//   "method1"(){},
+//   "method2"(){},
+//   ...
+// })
+
 Meteor.methods({
   "comments.update"(userComment) {
     if (Meteor.isServer) {
