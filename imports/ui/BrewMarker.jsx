@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import { Marker } from "react-google-maps";
 import PropTypes from "prop-types";
+
 // import BeerIcon from "public/favicon.ico";
 
 class BrewMarker extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false,
+      activeMarker: this.props.activeMarker
+    };
+    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
   toggleOpen() {
     //new logic should be to highlight in the list which brewery has been selected
-    // this.setState({ isOpen: !this.state.isOpen }, () => {
-    //   if (!this.state.isOpen) {
-    //     this.setState({ activeMarker: false }, () => {
-    //       this.props.closeMarkers(null);
-    //     });
-    //   } else {
-    //     this.props.closeMarkers(this.props.uid);
-    //   }
-    // });
+    this.setState({ isOpen: !this.state.isOpen }, () => {
+      if (!this.state.isOpen) {
+        this.setState({ activeMarker: false }, () => {
+          this.props.closeMarkers(null);
+        });
+      } else {
+        this.props.closeMarkers(this.props.id);
+      }
+    });
   }
 
   componenetDidUpdate(nextProps) {
@@ -32,32 +38,26 @@ class BrewMarker extends Component {
       <div>
         <Marker
           title={this.props.name}
-          onClick={this.toggleOpen}
+          onClick={e => this.props.onMarkerClick(this.props.brewery, e)}
           position={this.props.location}
-          icon={"marker-75.png"}
+          icon={
+            this.props.activeMarker ? "marker-75.png" : "softorange@0.5x.png"
+          }
         />
       </div>
     );
   }
 }
-//        <img
-//   className="mr-3 bg-light rounded"
-//   width="48"
-//   height="48"
-//   src={"favicon.ico"}
-// />
-// <Marker
-//   title={this.props.name}
-//   onClick={this.toggleOpen}
-//   position={this.props.location}
-//   icon={}
-// />
+
 BrewMarker.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   website_url: PropTypes.string.isRequired,
   location: PropTypes.object.isRequired,
-  brewery: PropTypes.object.isRequired
+  brewery: PropTypes.object.isRequired,
+  closeMarkers: PropTypes.func,
+  onMarkerClick: PropTypes.func,
+  activeMarker: PropTypes.bool
 };
 
 export default BrewMarker;

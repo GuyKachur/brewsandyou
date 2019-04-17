@@ -114,6 +114,20 @@ class Brewery extends Component {
               >
                 Website
               </a>
+              <a
+                className="brewAddressLink--primary"
+                href={
+                  "https://www.google.com/maps/dir/?api=1&destination=" +
+                  this.props.brewery[0].brewery.name +
+                  this.props.brewery[0].brewery.street +
+                  this.props.brewery[0].brewery.city +
+                  this.props.brewery[0].brewery.state
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Directions
+              </a>
             </p>
             <p>
               {Meteor.user() ? (

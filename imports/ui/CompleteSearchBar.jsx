@@ -5,6 +5,7 @@ import { Meteor } from "meteor/meteor";
 import BrewMapContainer from "./BrewMapContainer.jsx";
 import BreweriesList from "./BreweriesList.jsx";
 import PropTypes from "prop-types";
+import BreweryCard from "./BreweryCard";
 
 const getSuggestionValue = suggestion => suggestion.name;
 
@@ -296,11 +297,12 @@ class CompleteSearchBar extends Component {
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(
       this
     );
-    this.onListClick = this.onListClick.bind(this);
+    this.onBreweryClick = this.onBreweryClick.bind(this);
     this.onChange = this.onChange.bind(this);
 
-    this.debouncedGetSuggestions = debounce(500, this.getSuggestions);
+    this.goToBrewery = this.goToBrewery.bind(this);
 
+    this.debouncedGetSuggestions = debounce(500, this.getSuggestions);
     //
     // let sanJoseBreweries = Meteor.call("breweries.byCityState", {
     //   city: "San Jose",
@@ -337,65 +339,84 @@ class CompleteSearchBar extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   Meteor.call(
-  //     "breweries.byCityState",
-  //     {
-  //       city: "San Jose",
-  //       state: "California"
-  //     },
-  //     (err, res) => {
-  //       if (err) {
-  //         alert("There was error check the console");
-  //         console.log(err);
-  //         return;
-  //       }
-  //
-  //       console.log("Breweries recived", res);
-  //       this.setState({
-  //         breweries: res
-  //       });
-  //       console.log("breweries updated");
-  //     }
-  //   );
-  // }
-  componentDidUpdate(prevProps) {
-    if (!this.compare(this.props.breweries, prevProps.breweries)) {
-      console.log(
-        "componenet did update, breweries werent a match",
-        prevProps.breweries
-      );
-      // this.setState({
-      //   breweries: this.props.breweries
-      // });
-    }
-    // if (!this.compare(this.props.brewery, prevProps.brewery)) {
-    //   this.setState({ brewery: prevProps.brewery });
-    // }
-  }
-
-  compare(arr1, arr2) {
-    if (!arr1 || !arr2) return false;
-    if (arr1.length === 0 && arr2.length === 0) {
-      return true;
-    }
-    let result = true;
-
-    arr1.forEach(e1 =>
-      arr2.forEach(e2 => {
-        if (e1.length > 1 && e2.length) {
-          result = this.compare(e1, e2);
-        } else if (e1 !== e2) {
-          result = false;
-          return false;
+  componentDidMount() {
+    let location = { lng: -121.882347823612, lat: 37.3253017839889 };
+    let cityState = { city: "San Francisco", state: "California" };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((res, err) => {
+        if (err) {
+          console.log("geolocation error", err);
         } else {
-          result = true;
-        }
-      })
-    );
+          console.log("Response from get current position", res);
 
-    return result;
+          location = { lng: res.coords.longitude, lat: res.coords.latitude };
+        }
+      });
+      console.log("Location from mount", location);
+      Meteor.call("address.latlng.streetAddress", location, (err, res) => {
+        if (err) {
+          alert("There was error check the console");
+          console.log(err);
+          return;
+        }
+        console.log("CityState", location, res);
+        cityState = res;
+        Meteor.call("breweries.byCityState", cityState, (error, response) => {
+          if (error) {
+            alert("There was error check the console");
+            console.log(error);
+            return;
+          }
+
+          console.log("Breweries recived", response);
+          this.setState({
+            breweries: response
+          });
+          this.setState({
+            brewery: response[0]
+          });
+          console.log("breweries updated");
+        });
+      });
+    }
   }
+  // componentDidUpdate(prevProps) {
+  //   if (!this.compare(this.props.breweries, prevProps.breweries)) {
+  //     console.log(
+  //       "componenet did update, breweries werent a match",
+  //       prevProps.breweries
+  //     );
+  //     // this.setState({
+  //     //   breweries: this.props.breweries
+  //     // });
+  //   }
+  //   // if (!this.compare(this.props.brewery, prevProps.brewery)) {
+  //   //   this.setState({ brewery: prevProps.brewery });
+  //   // }
+  // }
+  //
+  // compare(arr1, arr2) {
+  //   if (!arr1 || !arr2) return false;
+  //   if (arr1.length === 0 && arr2.length === 0) {
+  //     return true;
+  //   }
+  //   let result = true;
+  //
+  //   arr1.forEach(e1 =>
+  //     arr2.forEach(e2 => {
+  //       if (e1.length > 1 && e2.length) {
+  //         result = this.compare(e1, e2);
+  //       } else if (e1 !== e2) {
+  //         result = false;
+  //         return false;
+  //       } else {
+  //         result = true;
+  //       }
+  //     })
+  //   );
+  //
+  //   return result;
+  // }
 
   getSuggestions(value) {
     console.log("GETSUGGESTIONS", value);
@@ -407,6 +428,9 @@ class CompleteSearchBar extends Component {
       }
 
       console.log("getsuggestions", res);
+      if (res.length === 0) {
+        res = [{ name: "Not Found, try another term" }];
+      }
       this.setState({ suggestions: res });
     });
   }
@@ -419,12 +443,13 @@ class CompleteSearchBar extends Component {
 
   onSuggestionsFetchRequested({ value }) {
     this.debouncedGetSuggestions(value);
+    //// TODO:
   }
 
   // we probably want to not do this, or... clear it but set another variable
   onSuggestionsClearRequested() {
     this.setState({
-      suggestions: []
+      suggestions: [{ name: "Not found, try another term" }]
     });
   }
 
@@ -464,21 +489,20 @@ class CompleteSearchBar extends Component {
     });
   }
 
-  onListClick(_event, { updatedBrewery }) {
-    // //clicked on list item, we want to update
-    // // if (this.state.brewery !== updatedBrewery) {
-    // //   console.log("onListClick Brewery " + updatedBrewery);
-    // //   this.setState({ brewery: updatedBrewery.brewery });
-    // // }
-    // alert("Updated Brewery " + updatedBrewery);
+  onBreweryClick(updatedBrewery) {
+    console.log("onBreweryClick", updatedBrewery);
     if (this.state.brewery !== updatedBrewery) {
       this.setState({ brewery: updatedBrewery });
       let cityLocation = {
-        city: updatedBrewery.city,
-        state: updatedBrewery.state
+        city: updatedBrewery.brewery.city,
+        state: updatedBrewery.brewery.state
       };
       this.getOtherBreweries(cityLocation);
     }
+  }
+  goToBrewery(id) {
+    alert("go to brewery clicked", id);
+    console.log("GO to brewery", id);
   }
 
   render() {
@@ -493,10 +517,9 @@ class CompleteSearchBar extends Component {
       className:
         "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4"
     };
-
+    console.log(this.state);
     return (
       <div className="mb-4">
-        <h1>Search</h1>
         <div className="position-relative">
           <Autosuggest
             suggestions={this.state.suggestions}
@@ -509,16 +532,34 @@ class CompleteSearchBar extends Component {
           />
         </div>
         <div className="row">
-          <div className="col-xl-4 col-md-6 boxsize">
-            <BreweriesList
-              breweries={this.state.breweries}
-              onClick={this.onListClick}
-            />
+          <div className="col-xl-5 col-md-6">
+            {this.state.brewery ? (
+              <BreweryCard
+                key={this.state.brewery.id}
+                id={this.state.brewery.id}
+                name={this.state.brewery.brewery.name}
+                brewery={this.state.brewery}
+                className={"selected-brewery"}
+                onClick={e => this.goToBrewery(this.state.brewery.id, e)}
+              />
+            ) : (
+              "loading"
+            )}
+
+            <div className="boxsize">
+              <BreweriesList
+                breweries={this.state.breweries}
+                onClick={this.goToBrewery}
+                brewery={this.state.brewery}
+              />
+            </div>
           </div>
-          <div className="col-xl-8 col-md-6">
+          <div className="col-xl-7 col-md-6">
             <BrewMapContainer
               brewery={this.state.brewery}
               breweries={this.state.breweries}
+              onMarkerClick={this.onBreweryClick}
+              activeMarker={this.state.brewery.id}
             />
           </div>
         </div>
@@ -532,12 +573,4 @@ CompleteSearchBar.propTypes = {
   brewery: PropTypes.object
 };
 
-// export default withTracker(() => {
-//   const handle = Meteor.subscribe("Breweries");
-//   return {
-//     breweries: Breweries.find({}).fetch(),
-//     user: Meteor.user(),
-//     ready: handle.ready()
-//   };
-// })(CompleteSearchBar);
 export default CompleteSearchBar;

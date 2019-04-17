@@ -17,7 +17,9 @@ class BreweryCard extends Component {
       this.props.brewery.brewery.state;
     return (
       <div>
-        <Card>
+        <Card
+          onClick={e => this.props.onClick(this.props.brewery.brewery.id, e)}
+        >
           <CardBody>
             <CardTitle>{this.props.name}</CardTitle>
             <CardSubtitle>{address}</CardSubtitle>

@@ -9,6 +9,7 @@ import BreweryCard from "./BreweryCard";
 class BreweriesList extends Component {
   constructor(props) {
     super(props);
+    // this.onClick = this.onClick.bind(this);
   }
 
   /** reloads heh list */
@@ -43,33 +44,37 @@ class BreweriesList extends Component {
 
     return result;
   }
+  //
+  // onClick() {
+  //   alert("breweriesList OnClick");
+  // }
 
   //renders a list of breweries
   render() {
     //console.log("LISTPROPS", this.props);
     const breweryCards = this.props.breweries.map(brewery => {
       //console.log("BREWERY IN BREWERY CARD" + brewery);
-      const className = brewery.highLight
-        ? "list-item-hover"
-        : "list-item-background";
+      if (brewery.id === this.props.brewery.id) {
+        return;
+      }
       let breweryCard = (
         <BreweryCard
           key={brewery.id}
           id={brewery.id}
           name={brewery.brewery.name}
           brewery={brewery}
-          className={className}
-          onClick={() => this.props.onClick(brewery)}
+          onClick={this.props.onClick}
         />
       );
       return breweryCard;
     });
-    return <div> {breweryCards} </div>;
+    return <div>{breweryCards} </div>;
   }
 }
 
 BreweriesList.propTypes = {
   breweries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  brewery: PropTypes.object.isRequired,
   onClick: PropTypes.func
 };
 

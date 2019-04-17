@@ -11,8 +11,13 @@ class BrewMapContainer extends Component {
     this.state = {
       breweries: props.breweries,
       brewery: props.brewery,
-      location: props.brewery.location
+      location: props.brewery.location,
+      activeMarker: props.brewery.id
     };
+
+    this.toggleShowPage = this.toggleShowPage.bind(this);
+
+    this.closeOtherMarkers = this.closeOtherMarkers.bind(this);
   }
 
   //update currently when breweies have been updated
@@ -20,6 +25,12 @@ class BrewMapContainer extends Component {
     if (!this.compare(this.props.breweries, prevProps.breweries)) {
       this.setState({
         breweries: this.props.breweries
+      });
+    }
+    if (this.props.brewery.id !== prevProps.brewery.id) {
+      this.setState({
+        brewery: this.props.brewery,
+        activeMarker: this.props.brewery.id
       });
     }
   }
@@ -56,6 +67,7 @@ class BrewMapContainer extends Component {
   //toggle marker on map
   toggleShowPage() {
     alert("You clicked it");
+    console.log("togglepageprops", this.props);
   }
   //moved serverside, should delete?
   // getLocation(incomingBrewery) {
@@ -117,8 +129,8 @@ class BrewMapContainer extends Component {
         loadingElement={<div style={{ height: "100%" }} />}
         containerElement={<div style={{ height: "600px", width: "100%" }} />}
         mapElement={<div style={{ height: "100%" }} />}
-        toggleShowPage={this.toggleShowPage}
-        activeMarker={this.state.activeMarker}
+        onMarkerClick={this.props.onMarkerClick}
+        activeMarker={this.props.activeMarker}
         closeOtherMarkers={this.closeOtherMarkers}
       />
     );
@@ -128,6 +140,8 @@ class BrewMapContainer extends Component {
 //expects brewires and brewery
 BrewMapContainer.propTypes = {
   breweries: PropTypes.arrayOf(PropTypes.object).isRequired,
-  brewery: PropTypes.object.isRequired
+  brewery: PropTypes.object.isRequired,
+  onMarkerClick: PropTypes.func,
+  activeMarker: PropTypes.number
 };
 export default BrewMapContainer;
