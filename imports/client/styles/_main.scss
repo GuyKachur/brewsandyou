@@ -81,6 +81,11 @@ textarea {
 .lnk-secondary:hover {
   color: #a2959f;
 }
+
+.nav-link:hover {
+    color: #ef6b47 !important;
+}
+
 .brewLink--primary {
   color: #ef6b47;
   cursor: pointer;
@@ -99,6 +104,11 @@ textarea {
   outline-color: #a2959f !important;
   border: none !important;
 }
+
+.btn:hover{
+  color: #ef6b47 !important;
+}
+
 .btn:active,
 .btn:focus,
 .btn.active,
