@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  InfoWindow
-} from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import BrewMarker from "./BrewMarker.jsx";
 
 /**
@@ -26,23 +21,17 @@ const BreweriesMap = withScriptjs(
             lat: parseFloat(brewery.brewery.latitude),
             lng: parseFloat(brewery.brewery.longitude)
           }}
-          activeMarker={
-            brewery.brewery.id === props.activeMarker ? true : false
-          }
+          activeMarker={brewery.id === props.activeMarker ? true : false}
           closeMarkers={props.closeOtherMarkers}
-          toggleShowPage={props.toggleShowPage}
+          onMarkerClick={props.onMarkerClick}
           brewery={brewery}
-        >
-          <InfoWindow visible={true}>
-            <h1>{"Guy"}</h1>
-          </InfoWindow>
-        </BrewMarker>
+        />
       );
       return marker;
     });
     //return a google map, with whatever makers we want.
     return (
-      <GoogleMap defaultZoom={12} center={props.location}>
+      <GoogleMap defaultZoom={14} center={props.location}>
         {markers}
       </GoogleMap>
     );

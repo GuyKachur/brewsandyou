@@ -28,6 +28,14 @@ if (Meteor.isServer) {
 //   }
 // });
 
+// Code revire from Yibo Zhao
+// I would suggest merging those Meteor.methods into one.
+// Meteor.methods({
+//   "method1"(){},
+//   "method2"(){},
+//   ...
+// })
+
 Meteor.methods({
   "comments.update"(userComment) {
     if (Meteor.isServer) {
@@ -140,6 +148,70 @@ Meteor.methods({
     }
   }
 });
+
+Meteor.methods({
+  "address.latlng.streetAddress"(latlng) {
+    if (Meteor.isServer) {
+      try {
+        console.log("LATLNG", latlng);
+        let response = HTTP.call(
+          "GET",
+          "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+            latlng.lat +
+            "," +
+            latlng.lng +
+            "&key=" +
+            GOOGLE_API_KEY
+        );
+        //console.log("reverse geoencoding response", response.content);
+        let fullJSON = JSON.parse(response.content);
+        // console.log("json parse latlng", fullJSON);
+        // console.log(
+        //   "ADDRESS COMPONENETS",
+        //   fullJSON.result[0].address_components
+        // );
+        //console.log(fullJSON);
+        let city = "San Francisco";
+        let state = "California";
+
+        for (
+          var i = 0;
+          i < fullJSON.results[0].address_components.length;
+          i++
+        ) {
+          for (
+            var b = 0;
+            b < fullJSON.results[0].address_components[i].types.length;
+            b++
+          ) {
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+            if (
+              fullJSON.results[0].address_components[i].types[b] ==
+              "administrative_area_level_1"
+            ) {
+              //this is the object you are looking for
+              state = fullJSON.results[0].address_components[i];
+              break;
+            }
+            if (
+              fullJSON.results[0].address_components[i].types[b] == "locality"
+            ) {
+              //this is the object you are looking for
+              city = fullJSON.results[0].address_components[i];
+              break;
+            }
+          }
+        }
+
+        console.log("City, State", city, state);
+        return { city: city.long_name, state: state.long_name };
+      } catch (e) {
+        console.log("address error" + e);
+      }
+    }
+  }
+});
+
 //retruns location
 function addressToLocaiton(streetAddress) {
   if (Meteor.isServer) {
@@ -170,29 +242,29 @@ function addressToLocaiton(streetAddress) {
 
 function validateBrewery(breweryToBeValidated) {
   if (Meteor.isServer) {
-    let invalidBrewery = {
-      id: 99999999,
-      name: "_Brewing",
-      brewery_type: "unknown",
-      street: "34800 Bob Wilson Dr",
-      city: "San Diego",
-      state: "CA",
-      postal_code: "92134",
-      country: "United States",
-      longitude: "-117.1596557",
-      latitude: "32.7078239",
-      phone: "",
-      website_url: "http://www.yesnoif.com",
-      updated_at: "2018-08-23T23:26:25.248Z",
-      tag_list: []
-    };
+    // let invalidBrewery = {
+    //   id: 99999999,
+    //   name: "_Brewing",
+    //   brewery_type: "unknown",
+    //   street: "34800 Bob Wilson Dr",
+    //   city: "San Diego",
+    //   state: "CA",
+    //   postal_code: "92134",
+    //   country: "United States",
+    //   longitude: "-117.1596557",
+    //   latitude: "32.7078239",
+    //   phone: "",
+    //   website_url: "http://www.yesnoif.com",
+    //   updated_at: "2018-08-23T23:26:25.248Z",
+    //   tag_list: []
+    // };
 
     if (
       !breweryToBeValidated.street ||
       !breweryToBeValidated.city ||
       !breweryToBeValidated.state
     ) {
-      return invalidBrewery;
+      return null;
     } else {
       //this brewery has a state city and
 
@@ -224,16 +296,18 @@ function collateBrewery(brewery) {
     if (databaseBrewery.length === 0) {
       //brewery wasnt found in database, insert database
       let sanitizedBrewery = validateBrewery(brewery);
-      Breweries.insert({
-        createdAt: Date.now(),
-        brewery: sanitizedBrewery,
-        id: brewery.id,
-        comments: [],
-        usersWhoRated: [],
-        rating: 0
-      });
-      let returnME = Breweries.find({ id: brewery.id }).fetch();
-      return returnME[0];
+      if (sanitizedBrewery !== null) {
+        Breweries.insert({
+          createdAt: Date.now(),
+          brewery: sanitizedBrewery,
+          id: brewery.id,
+          comments: [],
+          usersWhoRated: [],
+          rating: 0
+        });
+        let returnME = Breweries.find({ id: brewery.id }).fetch();
+        return returnME[0];
+      } else return null;
     } else {
       //brewery was found, grab comments
       return databaseBrewery[0];
@@ -294,8 +368,10 @@ Meteor.methods({
         //grab brewery from database, if not in database add to database w/location
 
         let returnBrewery = collateBrewery(JSON.parse(response.content));
-        console.log("RETURNEDBREWERY", returnBrewery);
-        return returnBrewery;
+        if (returnBrewery !== null) {
+          console.log("RETURNEDBREWERY", returnBrewery);
+          return returnBrewery;
+        }
       } catch (e) {
         console.log("breweryID error" + e);
       }
@@ -317,13 +393,16 @@ Meteor.methods({
           }
         );
         let resultList = [];
-        console.log("RESPONSE" + response);
+        //console.log("RESPONSE" + response);
 
-        console.log("DATA" + response.content);
-        JSON.parse(response.content).map(brewery =>
-          resultList.push(collateBrewery(brewery))
-        );
-        console.log(resultList);
+        //console.log("DATA" + response.content);
+        JSON.parse(response.content).map(brewery => {
+          let b = collateBrewery(brewery);
+          if (b !== null) {
+            resultList.push(b);
+          }
+        });
+        //console.log(resultList);
         return resultList;
       } catch (e) {
         console.log("http request error log" + e);
