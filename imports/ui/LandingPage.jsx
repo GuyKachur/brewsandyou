@@ -94,6 +94,7 @@ class LandingPage extends Component {
     const slides = items.map(item => {
       return (
         <CarouselItem
+          className="custom-carousel"
           onExiting={this.onExiting}
           onExited={this.onExited}
           key={item.src}
