@@ -41,7 +41,9 @@ class BrewMarker extends Component {
           onClick={e => this.props.onMarkerClick(this.props.brewery, e)}
           position={this.props.location}
           icon={
-            this.props.activeMarker ? "marker-75.png" : "softorange@0.5x.png"
+            this.props.activeMarker
+              ? "marker-75.png"
+              : "slightlybigger@0.6x.png"
           }
         />
       </div>
