@@ -73,13 +73,12 @@ class NavBar extends React.Component {
                         variant="outline-light"
                       >
                         <img
-                          className="rounded-circle"
+                          className="rounded"
                           height="30px"
                           width="30px"
-                          src={`https://robohash.org/${
-                            Meteor.users.findOne(Meteor.userId()).emails[0]
-                              .address
-                          }`}
+                          src={`https://api.adorable.io/avatars/48/${Meteor.users
+                            .findOne(Meteor.userId())
+                            .emails[0].address.toLowerCase()}@adorable.io.png`}
                           alt={
                             Meteor.users.findOne(Meteor.userId()).emails[0]
                               .address

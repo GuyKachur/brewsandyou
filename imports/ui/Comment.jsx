@@ -22,14 +22,16 @@ class Comment extends Component {
           className="mr-3 rounded"
           width="48"
           height="48"
-          src={`https://robohash.org/${this.state.owner.toLowerCase()}`}
+          src={`https://api.adorable.io/avatars/48/${this.state.owner.toLowerCase()}@adorable.io.png`}
           alt={this.state.owner}
         />
 
         <div className="media-body shadow-sm rounded bg-white border">
           <div className="d-flex justify-content-between bg-light p-2">
             <h6 className="mt-0 mb-1 text-muted">{this.state.owner}</h6>
-            <span className="text-muted">{moment(this.state.createdAt).fromNow()}</span>
+            <span className="text-muted">
+              {moment(this.state.createdAt).fromNow()}
+            </span>
           </div>
           <div className="m-2">{this.state.body}</div>
         </div>

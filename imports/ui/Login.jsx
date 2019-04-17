@@ -23,20 +23,22 @@ export default class Login extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    let email = this.state.email.trim();
-    let password = this.state.password.trim();
+    console.log("Login onSubmit: ", this.props.location.state.prevPath);
 
-    Meteor.loginWithPassword({ email }, password, err => {
-      if (err) {
-        // console.log("Error creating user: ", err);
-        this.setState({ error: "Incorrect login" });
-      } else {
-        console.log(email, "login successful.");
-        this.props.location.state
-          ? this.props.history.replace(this.props.location.state.prevPath)
-          : null;
-      }
-    });
+    // let email = this.state.email.trim();
+    // let password = this.state.password.trim();
+
+    // Meteor.loginWithPassword({ email }, password, err => {
+    //   if (err) {
+    //     // console.log("Error creating user: ", err);
+    //     this.setState({ error: "Incorrect login" });
+    //   } else {
+    //     console.log(email, "login successful.");
+    //     this.props.location.state
+    //       ? this.props.history.replace(this.props.location.state.prevPath)
+    //       : null;
+    //   }
+    // });
   }
 
   render() {
