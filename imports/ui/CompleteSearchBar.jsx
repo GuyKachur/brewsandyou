@@ -500,9 +500,17 @@ class CompleteSearchBar extends Component {
       this.getOtherBreweries(cityLocation);
     }
   }
-  goToBrewery(id) {
-    alert("go to brewery clicked", id);
-    console.log("GO to brewery", id);
+  goToBrewery(incomingbrewery) {
+    //alert("go to brewery clicked", id);
+    console.log("GO to brewery", incomingbrewery);
+    if (this.state.brewery !== incomingbrewery) {
+      this.setState({ brewery: incomingbrewery });
+      let cityLocation = {
+        city: incomingbrewery.brewery.city,
+        state: incomingbrewery.brewery.state
+      };
+      this.getOtherBreweries(cityLocation);
+    }
   }
 
   render() {
@@ -535,6 +543,9 @@ class CompleteSearchBar extends Component {
           <div className="col-xl-5 col-md-6">
             {this.state.brewery ? (
               <BreweryCard
+                body
+                outline
+                color="warning"
                 key={this.state.brewery.id}
                 id={this.state.brewery.id}
                 name={this.state.brewery.brewery.name}
