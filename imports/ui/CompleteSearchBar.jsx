@@ -350,33 +350,38 @@ class CompleteSearchBar extends Component {
           console.log("Response from get current position", res);
 
           location = { lng: res.coords.longitude, lat: res.coords.latitude };
-        }
-      });
-      console.log("Location from mount", location);
-      Meteor.call("address.latlng.streetAddress", location, (err, res) => {
-        if (err) {
-          alert("There was error check the console");
-          console.log(err);
-          return;
-        }
-        console.log("CityState", location, res);
-        cityState = res;
-        Meteor.call("breweries.byCityState", cityState, (error, response) => {
-          if (error) {
-            alert("There was error check the console");
-            console.log(error);
-            return;
-          }
+          console.log("Location from mount", location);
+          Meteor.call("address.latlng.streetAddress", location, (err, res) => {
+            if (err) {
+              alert("There was error check the console");
+              console.log(err);
+              return;
+            }
+            console.log("CityState", location, res);
+            cityState = res;
 
-          console.log("Breweries recived", response);
-          this.setState({
-            breweries: response
+            Meteor.call(
+              "breweries.byCityState",
+              cityState,
+              (error, response) => {
+                if (error) {
+                  alert("There was error check the console");
+                  console.log(error);
+                  return;
+                }
+
+                console.log("Breweries recived", response);
+                this.setState({
+                  breweries: response
+                });
+                this.setState({
+                  brewery: response[0]
+                });
+                console.log("breweries updated");
+              }
+            );
           });
-          this.setState({
-            brewery: response[0]
-          });
-          console.log("breweries updated");
-        });
+        }
       });
     }
   }
