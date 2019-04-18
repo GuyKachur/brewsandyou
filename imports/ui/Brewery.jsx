@@ -111,11 +111,14 @@ class Brewery extends Component {
               <a
                 className="brewLink--primary"
                 href={this.props.brewery[0].brewery.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Website
               </a>
+              <br />
               <a
-                className="brewAddressLink--primary"
+                className="brewLink--primary"
                 href={
                   "https://www.google.com/maps/dir/?api=1&destination=" +
                   this.props.brewery[0].brewery.name +
