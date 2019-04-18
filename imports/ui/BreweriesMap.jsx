@@ -31,7 +31,7 @@ const BreweriesMap = withScriptjs(
     });
     //return a google map, with whatever makers we want.
     return (
-      <GoogleMap defaultZoom={14} center={props.location}>
+      <GoogleMap defaultZoom={15} center={props.location}>
         {markers}
       </GoogleMap>
     );
