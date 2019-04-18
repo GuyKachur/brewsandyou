@@ -124,7 +124,7 @@ class BrewMapContainer extends Component {
           lng: this.props.brewery.brewery.longitude
         }}
         googleMapURL={
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyD9QZC8QrVnxhjlzO4mtMDlD4S7ei0DGnY&v=3.exp&libraries=geometry,drawing,places"
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyDklUg8DopxKO7mr8MTSMPxl_dukseRGLQ&v=3.exp&libraries=geometry,drawing,places"
         }
         loadingElement={<div style={{ height: "100%" }} />}
         containerElement={<div style={{ height: "600px", width: "100%" }} />}
