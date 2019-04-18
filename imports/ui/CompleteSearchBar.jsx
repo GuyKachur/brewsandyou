@@ -350,33 +350,38 @@ class CompleteSearchBar extends Component {
           console.log("Response from get current position", res);
 
           location = { lng: res.coords.longitude, lat: res.coords.latitude };
-        }
-      });
-      console.log("Location from mount", location);
-      Meteor.call("address.latlng.streetAddress", location, (err, res) => {
-        if (err) {
-          alert("There was error check the console");
-          console.log(err);
-          return;
-        }
-        console.log("CityState", location, res);
-        cityState = res;
-        Meteor.call("breweries.byCityState", cityState, (error, response) => {
-          if (error) {
-            alert("There was error check the console");
-            console.log(error);
-            return;
-          }
+          console.log("Location from mount", location);
+          Meteor.call("address.latlng.streetAddress", location, (err, res) => {
+            if (err) {
+              alert("There was error check the console");
+              console.log(err);
+              return;
+            }
+            console.log("CityState", location, res);
+            cityState = res;
 
-          console.log("Breweries recived", response);
-          this.setState({
-            breweries: response
+            Meteor.call(
+              "breweries.byCityState",
+              cityState,
+              (error, response) => {
+                if (error) {
+                  alert("There was error check the console");
+                  console.log(error);
+                  return;
+                }
+
+                console.log("Breweries recived", response);
+                this.setState({
+                  breweries: response
+                });
+                this.setState({
+                  brewery: response[0]
+                });
+                console.log("breweries updated");
+              }
+            );
           });
-          this.setState({
-            brewery: response[0]
-          });
-          console.log("breweries updated");
-        });
+        }
       });
     }
   }
@@ -500,9 +505,17 @@ class CompleteSearchBar extends Component {
       this.getOtherBreweries(cityLocation);
     }
   }
-  goToBrewery(id) {
-    alert("go to brewery clicked", id);
-    console.log("GO to brewery", id);
+  goToBrewery(incomingbrewery) {
+    //alert("go to brewery clicked", id);
+    console.log("GO to brewery", incomingbrewery);
+    if (this.state.brewery !== incomingbrewery) {
+      this.setState({ brewery: incomingbrewery });
+      let cityLocation = {
+        city: incomingbrewery.brewery.city,
+        state: incomingbrewery.brewery.state
+      };
+      this.getOtherBreweries(cityLocation);
+    }
   }
 
   render() {
@@ -535,12 +548,15 @@ class CompleteSearchBar extends Component {
           <div className="col-xl-5 col-md-6">
             {this.state.brewery ? (
               <BreweryCard
+                body
+                outline
+                color="warning"
                 key={this.state.brewery.id}
                 id={this.state.brewery.id}
                 name={this.state.brewery.brewery.name}
                 brewery={this.state.brewery}
                 className={"selected-brewery"}
-                onClick={e => this.goToBrewery(this.state.brewery.id, e)}
+                onClick={e => this.goToBrewery(this.state.brewery, e)}
               />
             ) : (
               "loading"
