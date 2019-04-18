@@ -104,7 +104,7 @@ class NavBar extends React.Component {
                 ) : (
                   <span>
                     <NavLink
-                      className="btn"
+                      className="button-link"
                       to={{
                         pathname: "/login",
                         state: { prevPath: location.pathname }
