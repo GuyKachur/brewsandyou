@@ -3,8 +3,7 @@ import { Meteor } from "meteor/meteor";
 import { HTTP } from "meteor/http";
 
 export const Breweries = new Mongo.Collection("Breweries");
-// const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-const GOOGLE_API_KEY = "AIzaSyAgnff6P1R09WbZ9y2nHf9ixSW_zkx86SU";
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 if (Meteor.isServer) {
   Meteor.publish("Breweries", function breweriesToPublish(brewID) {
