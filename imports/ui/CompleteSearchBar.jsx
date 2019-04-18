@@ -556,7 +556,7 @@ class CompleteSearchBar extends Component {
                 name={this.state.brewery.brewery.name}
                 brewery={this.state.brewery}
                 className={"selected-brewery"}
-                onClick={e => this.goToBrewery(this.state.brewery.id, e)}
+                onClick={e => this.goToBrewery(this.state.brewery, e)}
               />
             ) : (
               "loading"
