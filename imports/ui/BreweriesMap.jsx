@@ -33,7 +33,7 @@ function distanceCalc(userLocation, latlng) {
  */
 const BreweriesMap = withScriptjs(
   withGoogleMap(props => {
-    //  console.log("BREWEIREISMAPPROPS", props);
+    console.log("BREWEIREISMAPPROPS", props);
     //maps through the incoming breweries, pass on infomation to the brewmarkers, in case we want to pass anything around
     const markers = props.breweries.map(brewery => {
       // let distance = distanceCalc(props.userLocation, {
@@ -59,23 +59,17 @@ const BreweriesMap = withScriptjs(
       );
       return marker;
     });
-    if (this.props && this.props.userLocaiton) {
-      let userLocaiton = (
+    console.log("props in maps", props);
+    if (props.userLocaiton) {
+      let userLocation = (
         <Marker
           title={"User Location"}
-          position={this.props.userLocaiton}
-          icon={
-            <svg
-              height="10px"
-              width="10px"
-              style={{ boxShadow: "0px 0px 10px 2px rgba(239,108,71,1)" }}
-            >
-              <circle cx="50" cy="50" r="40" fill="#ef6b47" />
-            </svg>
-          }
+          key="userLocaiton"
+          position={props.userLocaiton}
+          icon={"userLocation.svg"}
         />
       );
-      markers.push(userLocaiton);
+      markers.push(userLocation);
     }
 
     //return a google map, with whatever makers we want.

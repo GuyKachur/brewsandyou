@@ -336,12 +336,12 @@ class CompleteSearchBar extends Component {
       },
       suggestions: [], //list of brewery id's and names
       breweries: sanJoseBreweries, //maybe .flat()
-      location: { lng: -121.882347823612, lat: 37.3253017839889 }
+      userLocation: { lat: 37.3253017839889, lng: -121.882347823612 }
     };
   }
 
   componentDidMount() {
-    let location = { lng: -121.882347823612, lat: 37.3253017839889 };
+    let location = this.state.userLocaiton;
     let cityState = { city: "San Francisco", state: "California" };
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((res, err) => {
@@ -350,9 +350,9 @@ class CompleteSearchBar extends Component {
         } else {
           console.log("Response from get current position", res);
 
-          location = { lng: res.coords.longitude, lat: res.coords.latitude };
+          location = { lat: res.coords.latitude, lng: res.coords.longitude };
           console.log("Location from mount", location);
-          this.setState({ location: location });
+          this.setState({ userLocation: location });
           Meteor.call("address.latlng.streetAddress", location, (err, res) => {
             if (err) {
               alert("There was error check the console");
@@ -591,6 +591,7 @@ class CompleteSearchBar extends Component {
                 brewery={this.state.brewery}
                 className={"selected-brewery"}
                 onClick={e => this.goToBrewery(this.state.brewery, e)}
+                distance={this.state.userLocation}
               />
               <br />
             </div>
@@ -606,6 +607,7 @@ class CompleteSearchBar extends Component {
                   breweries={this.state.breweries}
                   onClick={this.goToBrewery}
                   brewery={this.state.brewery}
+                  userLocation={this.state.userLocation}
                 />
               </div>
             ) : (
@@ -622,7 +624,7 @@ class CompleteSearchBar extends Component {
               breweries={this.state.breweries}
               onMarkerClick={this.onBreweryClick}
               activeMarker={this.state.brewery.id}
-              location={this.state.location}
+              location={this.state.userLocation}
             />
           </div>
         </div>

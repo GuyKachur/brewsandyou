@@ -44,6 +44,7 @@ class BreweriesList extends Component {
 
     return result;
   }
+
   //
   // onClick() {
   //   alert("breweriesList OnClick");
@@ -64,6 +65,7 @@ class BreweriesList extends Component {
           name={brewery.brewery.name}
           brewery={brewery}
           onClick={this.props.onClick}
+          userLocation={this.props.userLocation}
         />
       );
       return breweryCard;
