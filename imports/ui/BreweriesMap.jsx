@@ -8,7 +8,6 @@ import {
 } from "react-google-maps";
 import BrewMarker from "./BrewMarker.jsx";
 
-const google = window.google;
 function distanceCalc(userLocation, latlng) {
   var directionsService = new google.maps.DirectionsService();
   var request = {
@@ -27,6 +26,7 @@ function distanceCalc(userLocation, latlng) {
   });
 }
 
+const google = window.google;
 /**
  *  A brewery map,
  *
@@ -60,15 +60,14 @@ const BreweriesMap = withScriptjs(
       return marker;
     });
     console.log("props in maps", props);
+    //
     if (props.userLocaiton) {
       let userLocation = (
         <Marker
           title={"User Location"}
           key="userLocaiton"
           position={props.userLocaiton}
-          icon={"userLocation.svg"}
-          height="10px"
-          width="10px"
+          icon={"Artboard 1@0.55x.png"}
         />
       );
       markers.push(userLocation);

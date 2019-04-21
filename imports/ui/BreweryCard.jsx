@@ -96,27 +96,32 @@ class BreweryCard extends Component {
           style={{ boxShadow: border, paddingBottom: "5px" }}
         >
           <CardBody>
-            {this.props.className === "selected-brewery" ? (
-              <img
-                src="beers-clinking.svg"
-                width="40px"
-                height="40px"
-                alt="our-logo"
-                style={{ marginRight: 0.3 + "em" }}
-              />
-            ) : (
-              ""
-            )}
-            <CardTitle>{this.props.name}</CardTitle>
-            <CardSubtitle>{address}</CardSubtitle>
-            {this.props.brewery.id === -1 ? (
-              ""
-            ) : (
-              <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>
-                More Info
-              </NavLink>
-            )}
-            <p>{distance} </p>
+            <span>
+              {this.props.className === "selected-brewery" ? (
+                <img
+                  src="beers-clinking.svg"
+                  width="40px"
+                  height="40px"
+                  alt="our-logo"
+                  style={{ marginRight: 0.3 + "em" }}
+                />
+              ) : (
+                ""
+              )}
+              <CardTitle>{this.props.name}</CardTitle>
+              <CardSubtitle>{address}</CardSubtitle>
+              {this.props.brewery.id === -1 ? (
+                ""
+              ) : (
+                <NavLink
+                  className="lnk-primary"
+                  to={"brewery/" + this.props.id}
+                >
+                  More Info
+                </NavLink>
+              )}
+              <p>{distance} </p>
+            </span>
           </CardBody>
         </Card>
       </div>
