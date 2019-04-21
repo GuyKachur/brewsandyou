@@ -580,14 +580,9 @@ class CompleteSearchBar extends Component {
             inputProps={inputProps}
             onSuggestionSelected={this.onSuggestionSelected}
           />
-        </div>
-        <div className="row">
-          <div className="col-xl-5 col-md-6">
-            {this.state.brewery ? (
+          {this.state.brewery ? (
+            <div>
               <BreweryCard
-                body
-                outline
-                color="warning"
                 key={this.state.brewery.id}
                 id={this.state.brewery.id}
                 name={this.state.brewery.brewery.name}
@@ -595,17 +590,29 @@ class CompleteSearchBar extends Component {
                 className={"selected-brewery"}
                 onClick={e => this.goToBrewery(this.state.brewery, e)}
               />
-            ) : (
-              "loading"
-            )}
-
-            <div className="boxsize">
-              <BreweriesList
-                breweries={this.state.breweries}
-                onClick={this.goToBrewery}
-                brewery={this.state.brewery}
-              />
+              <br />
             </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="row is-flex">
+          <div className="col-xl-5 col-md-6">
+            {this.state.breweries.length !== 0 ? (
+              <div className="scrollbar scrollbar-sunny-morning">
+                <BreweriesList
+                  breweries={this.state.breweries}
+                  onClick={this.goToBrewery}
+                  brewery={this.state.brewery}
+                />
+              </div>
+            ) : (
+              <img
+                src="https://66.media.tumblr.com/885dcfc467c006ea0d7b7b56ccdbf365/tumblr_pq71x7tP8m1qa0f2wo1_500.gif"
+                alt="Beer with bubbles"
+                width="100%"
+              />
+            )}
           </div>
           <div className="col-xl-7 col-md-6">
             <BrewMapContainer
