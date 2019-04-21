@@ -21,9 +21,13 @@ class BreweryCard extends Component {
           <CardBody>
             <CardTitle>{this.props.name}</CardTitle>
             <CardSubtitle>{address}</CardSubtitle>
-            <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>
-              More Info
-            </NavLink>
+            {this.props.brewery.id === -1 ? (
+              ""
+            ) : (
+              <NavLink className="lnk-primary" to={"brewery/" + this.props.id}>
+                More Info
+              </NavLink>
+            )}
           </CardBody>
         </Card>
       </div>

@@ -19,7 +19,7 @@ class NavBar extends React.Component {
           <div className="container">
             <NavLink className="font-weight-bold navbar-brand" to="/">
               <img
-                src="favicon-96x96.png"
+                src="beers-clinking.svg"
                 width="40"
                 height="40"
                 alt="our-logo"

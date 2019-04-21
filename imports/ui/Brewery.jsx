@@ -144,7 +144,13 @@ class Brewery extends Component {
         <div className="commentList text-left">{this.renderForm()}</div>
       </div>
     ) : (
-      <div> Loading ... </div>
+      <div>
+        {" "}
+        <img
+          src="https://66.media.tumblr.com/885dcfc467c006ea0d7b7b56ccdbf365/tumblr_pq71x7tP8m1qa0f2wo1_500.gif"
+          alt="Beer with bubbles"
+        />{" "}
+      </div>
     );
   }
 }

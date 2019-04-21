@@ -15,19 +15,19 @@ import Signup from "./Signup.jsx";
 import LandingPage from "./LandingPage.jsx";
 import CompleteSearchBar from "./CompleteSearchBar.jsx";
 
-const HomeComponent = (props) => {
+const HomeComponent = props => {
   return (
     <div className="container text-center">
-      <LandingPage {...props}/>
+      <LandingPage {...props} />
     </div>
   );
 };
 
-const SearchComponent = (props) => {
+const SearchComponent = props => {
   return (
     <div className="container col-md-8">
       <div className="container text-center">
-        <CompleteSearchBar {...props}/>
+        <CompleteSearchBar {...props} />
       </div>
     </div>
   );
@@ -60,8 +60,11 @@ const UserAccount = () => {
   console.log("Meteor.user(): ", Meteor.user().emails[0].address);
   return (
     <div className="container text-center">
-      <h1>Edit User Account Stuff</h1>
-      <p>{Meteor.user().emails[0].address}</p>
+      <img
+        src="https://66.media.tumblr.com/be3a401acea419fb910ab622f4885efe/tumblr_pq6sd09dbb1qa0f2wo2_500.gif"
+        alt="beerother-gif"
+      />
+      <h1>Page Coming Soon</h1>
     </div>
   );
 };

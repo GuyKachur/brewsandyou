@@ -371,13 +371,45 @@ class CompleteSearchBar extends Component {
                 }
 
                 console.log("Breweries recived", response);
-                this.setState({
-                  breweries: response
-                });
-                this.setState({
-                  brewery: response[0]
-                });
-                console.log("breweries updated");
+                if (response.length === 0) {
+                  let noCloseByBrewries = {
+                    _id: "J6EMxQp7t9FM2MyuG",
+                    createdAt: 1554427487533,
+                    brewery: {
+                      id: 1171,
+                      name: "No Breweries found",
+                      brewery_type: "brewpub",
+                      street: "Here in",
+                      city: cityState.city,
+                      state: cityState.state,
+                      postal_code: "",
+                      country: "United States",
+                      longitude: location.lng,
+                      latitude: location.lat,
+                      phone: "0",
+                      website_url: "",
+                      updated_at: "2018-08-24T00:04:53.123Z",
+                      tag_list: []
+                    },
+                    id: -1,
+                    comments: [],
+                    rating: 0
+                  };
+                  this.setState({
+                    brewery: noCloseByBrewries
+                  });
+                  this.setState({
+                    breweries: []
+                  });
+                } else {
+                  this.setState({
+                    breweries: response
+                  });
+                  this.setState({
+                    brewery: response[0]
+                  });
+                  console.log("breweries updated");
+                }
               }
             );
           });
@@ -434,7 +466,7 @@ class CompleteSearchBar extends Component {
 
       console.log("getsuggestions", res);
       if (res.length === 0) {
-        res = [{ name: "Not Found, try another term" }];
+        res = [{ name: "Not Found, try another term", id: -1 }];
       }
       this.setState({ suggestions: res });
     });
@@ -454,28 +486,33 @@ class CompleteSearchBar extends Component {
   // we probably want to not do this, or... clear it but set another variable
   onSuggestionsClearRequested() {
     this.setState({
-      suggestions: [{ name: "Not found, try another term" }]
+      suggestions: [{ name: "Not found, try another term", id: -1 }]
     });
   }
 
   //suggestion will have id and name
   onSuggestionSelected(_event, { suggestion }) {
     console.log("On suggestion selected", suggestion);
-    Meteor.call("breweries.breweryID", suggestion.id, (err, res) => {
-      if (err) {
-        alert("There was error check the console");
-        console.log(err);
-        return;
-      }
-      console.log("suggestion selected", res);
-      this.setState({ brewery: res });
-      let cityLocation = {
-        city: res.brewery.city,
-        state: res.brewery.state
-      };
-      this.getOtherBreweries(cityLocation);
-    });
-
+    if (suggestion.id > 0) {
+      //check for bogus id, and dont make api request
+      Meteor.call("breweries.breweryID", suggestion.id, (err, res) => {
+        if (err) {
+          alert("There was error check the console");
+          console.log(err);
+          return;
+        }
+        console.log("suggestion selected", res);
+        this.setState({ brewery: res });
+        let cityLocation = {
+          city: res.brewery.city,
+          state: res.brewery.state
+        };
+        this.getOtherBreweries(cityLocation);
+      });
+    } else {
+      //no breweries near Location
+      console.log("invalid selection");
+    }
     //so we got a suggestion, now we have the brewry address
   }
 
