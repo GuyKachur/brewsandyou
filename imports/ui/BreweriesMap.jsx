@@ -67,6 +67,8 @@ const BreweriesMap = withScriptjs(
           key="userLocaiton"
           position={props.userLocaiton}
           icon={"userLocation.svg"}
+          height="10px"
+          width="10px"
         />
       );
       markers.push(userLocation);
