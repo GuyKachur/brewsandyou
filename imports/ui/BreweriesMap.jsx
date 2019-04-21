@@ -60,14 +60,14 @@ const BreweriesMap = withScriptjs(
       return marker;
     });
     console.log("props in maps", props);
-    //
+    // userLocation@0.8x.png
     if (props.userLocaiton) {
       let userLocation = (
         <Marker
           title={"User Location"}
           key="userLocaiton"
           position={props.userLocaiton}
-          icon={"Artboard 1@0.55x.png"}
+          icon={"userLocation.png"}
         />
       );
       markers.push(userLocation);
