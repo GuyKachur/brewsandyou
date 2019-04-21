@@ -335,7 +335,8 @@ class CompleteSearchBar extends Component {
         rating: 0
       },
       suggestions: [], //list of brewery id's and names
-      breweries: sanJoseBreweries //maybe .flat()
+      breweries: sanJoseBreweries, //maybe .flat()
+      location: { lng: -121.882347823612, lat: 37.3253017839889 }
     };
   }
 
@@ -351,6 +352,7 @@ class CompleteSearchBar extends Component {
 
           location = { lng: res.coords.longitude, lat: res.coords.latitude };
           console.log("Location from mount", location);
+          this.setState({ location: location });
           Meteor.call("address.latlng.streetAddress", location, (err, res) => {
             if (err) {
               alert("There was error check the console");
@@ -620,6 +622,7 @@ class CompleteSearchBar extends Component {
               breweries={this.state.breweries}
               onMarkerClick={this.onBreweryClick}
               activeMarker={this.state.brewery.id}
+              location={this.state.location}
             />
           </div>
         </div>

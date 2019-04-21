@@ -33,16 +33,17 @@ p {
   margin-bottom: $space;
 }
 
-input[type="text"],
-textarea {
-  border: 1px solid $input-border;
-  color: #ef6b47;
-  font-size: $base-font-size;
-  font-family: $body-default-font-family;
-  margin-bottom: $space;
-  padding: $input-spacing;
-}
+// input[type="text"],
+// textarea {
+//   border: 1px solid $input-border;
+//   color: #ef6b47;
+//   font-size: $base-font-size;
+//   font-family: $body-default-font-family;
+//   margin-bottom: $space;
+//   padding: $input-spacing;
+// }
 
+input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {

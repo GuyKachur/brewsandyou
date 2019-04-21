@@ -132,6 +132,7 @@ class BrewMapContainer extends Component {
         onMarkerClick={this.props.onMarkerClick}
         activeMarker={this.props.activeMarker}
         closeOtherMarkers={this.closeOtherMarkers}
+        userLocaiton={this.props.location}
       />
     );
   }
