@@ -87,6 +87,10 @@ textarea {
   color: #ef6b47 !important;
 }
 
+.navbar-brand {
+  margin-right: 0 !important;
+}
+
 .brewLink--primary {
   color: #ef6b47;
   cursor: pointer;
@@ -124,6 +128,7 @@ textarea {
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding-left: 0;
 
   &:hover {
     color: #ef6b47 !important;
@@ -368,4 +373,26 @@ footer {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+:focus {
+  outline: #ef6b47 auto 5px !important;
+}
+
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 3rem !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.75rem !important;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .nav-login-signup {
+    order: 1;
+  }
 }

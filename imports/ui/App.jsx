@@ -99,7 +99,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/account",
+              pathname: "/search",
               state: { from: props.location }
             }}
           />

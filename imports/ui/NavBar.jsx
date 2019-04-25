@@ -16,53 +16,36 @@ class NavBar extends React.Component {
     return (
       <div className="">
         <nav className="navbar navbar-expand-sm navbar-light">
-          <div className="container">
-            <NavLink className="font-weight-bold navbar-brand" to="/">
-              <img
-                src="beers-clinking.svg"
-                width="40"
-                height="40"
-                alt="our-logo"
-                style={{ marginRight: 0.3 + "em" }}
-              />
-              Brews <span id="ampColor">&</span> <span id="youColor">You</span>
-            </NavLink>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
+          <div className="container navbar-container">
+            <div className="name-logo">
+              <NavLink className="font-weight-bold navbar-brand" to="/">
+                <img
+                  src="beers-clinking.svg"
+                  width="40"
+                  height="40"
+                  alt="our-logo"
+                  style={{ marginRight: 0.3 + "em" }}
+                />
+                Brews <span id="ampColor">&</span>{" "}
+                <span id="youColor">You</span>
+              </NavLink>
+            </div>
 
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    activeClassName="active"
-                    to="/search"
-                  >
-                    Search
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    activeClassName="active"
-                    to="/about"
-                  >
-                    About
-                  </NavLink>
-                </li>
-              </ul>
+            <div className="collapse-button">
+              <button
+                className="navbar-toggler p-0 m-0"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+            </div>
+
+            <div className="nav-login-signup">
               <div className="md-form my-0">
                 {Meteor.user() ? (
                   <span>
@@ -124,6 +107,32 @@ class NavBar extends React.Component {
                   </span>
                 )}
               </div>
+            </div>
+
+            <div
+              className="collapse navbar-collapse pl-2"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    activeClassName="active"
+                    to="/search"
+                  >
+                    Search
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    activeClassName="active"
+                    to="/about"
+                  >
+                    About
+                  </NavLink>
+                </li>
+              </ul>
             </div>
           </div>
         </nav>
