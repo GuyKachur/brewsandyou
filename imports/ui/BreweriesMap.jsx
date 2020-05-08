@@ -1,4 +1,8 @@
 import React from "react";
+// Code review from Yibo Zhao
+// Can you believe that react-google-maps and google-map-react are two different React component libraries even though they have similar names.
+// And google-map-react is not compatible with Meteor.
+// I should try to consider substitute Mapbox with react-google-maps in project 5. Thanks for your help.
 import {
   withScriptjs,
   withGoogleMap,

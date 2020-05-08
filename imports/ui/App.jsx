@@ -118,6 +118,9 @@ class App extends Component {
     };
   }
 
+  // Code revire from Yibo Zhao
+  // These route wrapper, ProtectedRoute and PriveRoute, are good. I like them.
+  // Would you mind me borrowing your idea to implement our project's router? :D
   render() {
     return (
       <Router>
